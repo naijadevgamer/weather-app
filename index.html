@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html
+  lang="en"
+  class="text-html max-tl:text-land max-tp:text-port min-[1800px]:text-desktop"
+>
   <head>
     <meta charset="utf-8" />
     <meta
@@ -17,8 +20,26 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" href="src/styles/style.css" />
     <title>Weather App</title>
   </head>
-  <body></body>
+  <body
+    class="font-raleway grid grid-rows-[100vh] grid-cols-whole text-primary-text"
+  >
+    <div class="bg-secondary-bg p-8">
+      <header class="flex justify-between">
+        <button class="h-16 w-64 bg-btn-bg1 shadow-lg">
+          Search for places
+        </button>
+        <button
+          class="locator bg-btn-bg1 h-16 w-16 rounded-[50%] grid justify-center items-center shadow-lg"
+        >
+          <svg class="fill-primary-text h-10 w-10">
+            <use xlink:href="./src/images/sprite.svg#icon-target"></use>
+          </svg>
+        </button>
+      </header>
+    </div>
+    <main class="bg-primary-bg"></main>
+  </body>
 </html>

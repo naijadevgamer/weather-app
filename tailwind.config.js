@@ -22,6 +22,13 @@ module.exports = {
         port: "53%",
         16: "16px",
       },
+      gridTemplateColumns: {
+        // Simple 16 column grid
+        whole: "8fr, 17fr",
+
+        // Complex site-specific column configuration
+        footer: "200px minmax(900px, 1fr) 100px",
+      },
       screens: {
         "large-desktop": "1800px", // 1800px
         tl: "1200px", // tablet-landscape
