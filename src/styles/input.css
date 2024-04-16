@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply h-16 w-16 rounded-[50%] shadow-lg text-[1.8rem];
+}
+.btn--locator {
+  @apply bg-btn-bg1  grid justify-center items-center;
+}
+.btn--celcius {
+  @apply bg-primary-text text-dark-text;
+}
+.btn--farenheit {
+  @apply bg-btn-bg2 text-primary-text;
+}
+
+/* Days component  */
+.day {
+  @apply bg-secondary-bg p-6 flex flex-col text-center;
+}
+.day__img {
+  @apply h-[6.2rem] mt-1 mb-auto self-center;
+}
+.day__temp {
+  @apply flex justify-between text-[1.6rem];
+}
+
+.colorized {
+  filter: brightness(0) saturate(100%) invert(12%) sepia(35%) saturate(802%)
+    hue-rotate(195deg) brightness(98%) contrast(87%);
+}

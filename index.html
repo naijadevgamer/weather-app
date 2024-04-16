@@ -24,22 +24,139 @@
     <title>Weather App</title>
   </head>
   <body
-    class="font-raleway grid grid-rows-[100vh] grid-cols-whole text-primary-text"
+    class="font-raleway grid grid-rows-[100vh] grid-cols-body text-primary-text text-[1.6rem]"
   >
-    <div class="bg-secondary-bg p-8">
-      <header class="flex justify-between">
+    <!-- Minor Section Start: Weather Display -->
+    <section class="bg-secondary-bg py-20 flex flex-col">
+      <!-- Header with search and target buttons -->
+      <header class="flex justify-between px-16">
         <button class="h-16 w-64 bg-btn-bg1 shadow-lg">
           Search for places
         </button>
-        <button
-          class="locator bg-btn-bg1 h-16 w-16 rounded-[50%] grid justify-center items-center shadow-lg"
-        >
+        <button class="btn btn--locator">
           <svg class="fill-primary-text h-10 w-10">
             <use xlink:href="./src/images/sprite.svg#icon-target"></use>
           </svg>
         </button>
       </header>
-    </div>
-    <main class="bg-primary-bg"></main>
+
+      <!-- Weather image  -->
+      <div
+        class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto"
+      >
+        <img
+          class="absolute object-cover left-0 top-0 object-center h-full w-full colorized"
+          src="/src/images/Cloud-background.png"
+          alt="Background image"
+        />
+        <img
+          class="relative z-10"
+          src="src/images/Shower.png"
+          alt="Weather image"
+        />
+      </div>
+
+      <!-- Weather Temp Value  -->
+      <div class="mx-auto px-16">
+        <span class="text-[14.4rem]">15</span
+        ><span class="text-[4.8rem] text-secondary-text">°C</span>
+      </div>
+      <!-- Weather Name  -->
+      <p class="mx-auto text-[3.6rem] my-auto">Shower</p>
+
+      <!-- Weather Date  -->
+      <div
+        class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16"
+      >
+        <p>Today</p>
+        <span class="mx-4">•</span>
+        <p>Fri, 5, jun</p>
+      </div>
+
+      <!-- Weather Location  -->
+      <div class="text-secondary-text mx-auto flex items-center px-16">
+        <svg class="fill-secondary-text h-10 w-10">
+          <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
+        </svg>
+        <p class="city">Helsinki</p>
+      </div>
+    </section>
+    <!-- Minor Section End: : Weather Display-->
+
+    <!-- Main Start: Next Five Days and Today's Highlight -->
+    <main class="bg-primary-bg px-48 py-20">
+      <!-- Temp Degree settings -->
+      <div class="flex justify-end gap-6 mb-20">
+        <button class="btn btn--celcius">°C</button>
+        <button class="btn btn--farenheit">°F</button>
+      </div>
+
+      <!-- Next Five Days Start-->
+      <div class="grid grid-rows-[17.7rem] grid-cols-5 gap-8">
+        <!-- Day 1: Tomorrow -->
+        <div class="day">
+          <p class="day__name">Tomorrow</p>
+          <img src="src/images/Thunderstorm.png" alt="" class="day__img" />
+          <div class="day__temp">
+            <p class="max">16°C</p>
+            <p class="min text-secondary-text">11°C</p>
+          </div>
+        </div>
+
+        <!-- Day 2  -->
+        <div class="day">
+          <p class="day__name">Tomorrow</p>
+          <img src="src/images/Thunderstorm.png" alt="" class="day__img" />
+          <div class="day__temp">
+            <p class="max">16°C</p>
+            <p class="min text-secondary-text">11°C</p>
+          </div>
+        </div>
+
+        <!-- Day 3  -->
+        <div class="day">
+          <p class="day__name">Tomorrow</p>
+          <img src="src/images/Thunderstorm.png" alt="" class="day__img" />
+          <div class="day__temp">
+            <p class="max">16°C</p>
+            <p class="min text-secondary-text">11°C</p>
+          </div>
+        </div>
+
+        <!-- Day 4  -->
+        <div class="day">
+          <p class="day__name">Tomorrow</p>
+          <img src="src/images/Thunderstorm.png" alt="" class="day__img" />
+          <div class="day__temp">
+            <p class="max">16°C</p>
+            <p class="min text-secondary-text">11°C</p>
+          </div>
+        </div>
+
+        <!-- Day 5  -->
+        <div class="day">
+          <p class="day__name">Tomorrow</p>
+          <img src="src/images/Thunderstorm.png" alt="" class="day__img" />
+          <div class="day__temp">
+            <p class="max">16°C</p>
+            <p class="min text-secondary-text">11°C</p>
+          </div>
+        </div>
+      </div>
+      <!-- Next Five Days End-->
+
+      <!-- Today's Highlight Start-->
+      <div class="mt-32">
+        <h2 class="text-[2.4rem] mb-10">Today's Highlight</h2>
+        <div class="grid grid-rows-highlight grid-cols-2 gap-20">
+          <div class="bg-secondary-bg"></div>
+          <div class="bg-secondary-bg"></div>
+          <div class="bg-secondary-bg"></div>
+          <div class="bg-secondary-bg"></div>
+        </div>
+      </div>
+      <!-- Today's Highlight End-->
+    </main>
+    <!-- Main Start: Next Five Days and Today's Highlight -->
   </body>
 </html>

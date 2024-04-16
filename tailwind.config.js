@@ -23,11 +23,12 @@ module.exports = {
         16: "16px",
       },
       gridTemplateColumns: {
-        // Simple 16 column grid
-        whole: "8fr, 17fr",
-
-        // Complex site-specific column configuration
-        footer: "200px minmax(900px, 1fr) 100px",
+        // Body layout
+        body: "8fr, 17fr",
+      },
+      gridTemplateRows: {
+        // Body layout
+        highlight: "20.4rem, 15.9rem",
       },
       screens: {
         "large-desktop": "1800px", // 1800px
