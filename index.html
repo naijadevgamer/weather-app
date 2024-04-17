@@ -27,7 +27,7 @@
     class="font-raleway grid grid-rows-body grid-cols-body text-primary-text text-[1.6rem]"
   >
     <!-- Minor Section Start: Weather Display -->
-    <section class="bg-secondary-bg py-20 flex flex-col">
+    <section class="bg-secondary-bg py-14 flex flex-col">
       <!-- Header with search and target buttons -->
       <header class="flex justify-between px-16">
         <button class="h-16 w-64 bg-btn-bg1 shadow-lg">
@@ -84,7 +84,7 @@
     <!-- Minor Section End: : Weather Display-->
 
     <!-- Main Start: Next Five Days and Today's Highlight -->
-    <main class="bg-primary-bg px-48 py-20">
+    <main class="bg-primary-bg px-48 py-14">
       <!-- Temp Degree settings -->
       <div class="flex justify-end gap-6 mb-20">
         <button class="btn btn--celcius">°C</button>
@@ -181,7 +181,20 @@
             </p>
 
             <!-- Humidity range bar  -->
-            <input type="" />
+            <div class="w-[22.9rem] mx-auto text-[1.2rem] text-tertiary-text">
+              <p class="flex justify-between px-1">
+                <span class="inline-block">0</span>
+                <span class="inline-block">50</span>
+                <span class="inline-block">100</span>
+              </p>
+
+              <div
+                class="w-full h-[8px] rounded-3xl overflow-hidden bg-primary-text"
+              >
+                <p class="w-[84%] bg-range-bg h-full"></p>
+              </div>
+              <div class="flex justify-end px-1">%</div>
+            </div>
           </div>
 
           <!-- Visibility -->

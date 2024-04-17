@@ -11,6 +11,8 @@ module.exports = {
         "primary-text": "#E7E7EB",
         "secondary-text": "#88869D",
         "dark-text": "#110E3C",
+        "tertiary-text": "#A09FB1",
+        "range-bg": "#ffec65",
       },
       fontFamily: {
         raleway: ["Raleway", "sans-serif"],
@@ -29,7 +31,7 @@ module.exports = {
       gridTemplateRows: {
         // Body layout
         highlight: "20.4rem, 15.9rem",
-        body: "minmax(100vh, 1fr)",
+        body: "minmax(100vh, 102.3rem)",
       },
       screens: {
         "large-desktop": "1800px", // 1800px
