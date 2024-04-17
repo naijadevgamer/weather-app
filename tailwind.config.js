@@ -29,6 +29,7 @@ module.exports = {
       gridTemplateRows: {
         // Body layout
         highlight: "20.4rem, 15.9rem",
+        body: "minmax(100vh, 1fr)",
       },
       screens: {
         "large-desktop": "1800px", // 1800px

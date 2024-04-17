@@ -2,6 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  display: block;
+  background-color: #100e1d;
+}
+body::-webkit-scrollbar-thumb {
+  background-color: #6e707a;
+  border-radius: 4px;
+}
+body::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:active {
+  background-color: #585676;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+}
+
 .btn {
   @apply h-16 w-16 rounded-[50%] shadow-lg text-[1.8rem];
 }
