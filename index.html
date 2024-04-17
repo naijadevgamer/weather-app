@@ -143,16 +143,66 @@
           </div>
         </div>
       </div>
-      <!-- Next Five Days End-->
+      <!-- Next Five Days End -->
 
-      <!-- Today's Highlight Start-->
+      <!-- Today's Highlight Start -->
       <div class="mt-32">
         <h2 class="text-[2.4rem] mb-10">Today's Highlight</h2>
         <div class="grid grid-rows-highlight grid-cols-2 gap-20">
-          <div class="bg-secondary-bg"></div>
-          <div class="bg-secondary-bg"></div>
-          <div class="bg-secondary-bg"></div>
-          <div class="bg-secondary-bg"></div>
+          <!-- Wind status -->
+          <div class="bg-secondary-bg text-center p-8">
+            <h3>Wind status</h3>
+
+            <!-- Wind value  -->
+            <p class="text-[6.4rem]">
+              <span>7</span><span class="text-[3.6rem]">mph</span>
+            </p>
+
+            <!-- Wind visual  -->
+            <div
+              class="text-secondary-text mx-auto flex items-center justify-center"
+            >
+              <div class="btn btn--wind mr-4">
+                <svg class="fill-primary-text h-6 w-6">
+                  <use xlink:href="./src/images/sprite.svg#icon-compass"></use>
+                </svg>
+              </div>
+              <p class="text-[1.4rem]">WSW</p>
+            </div>
+          </div>
+
+          <!-- Humidity -->
+          <div class="bg-secondary-bg text-center p-8">
+            <h3>Humidity</h3>
+
+            <!-- Humidity value  -->
+            <p class="text-[6.4rem]">
+              <span>84</span><span class="text-[3.6rem]">%</span>
+            </p>
+
+            <!-- Humidity range bar  -->
+            <input type="" />
+          </div>
+
+          <!-- Visibility -->
+          <div class="bg-secondary-bg text-center p-8">
+            <h3>Visibility</h3>
+
+            <!-- Visibility value  -->
+            <p class="text-[6.4rem]">
+              <span>6,4</span><span class="text-[3.6rem]"> miles</span>
+            </p>
+          </div>
+
+          <!-- Air pressure-->
+          <div class="bg-secondary-bg text-center p-8">
+            <h3>Air pressure</h3>
+
+            <!-- Air pressure value  -->
+            <p class="text-[6.4rem]">
+              <span>998</span><span class="text-[3.6rem]"> mb</span>
+            </p>
+          </div>
         </div>
       </div>
       <!-- Today's Highlight End-->

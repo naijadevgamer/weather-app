@@ -589,6 +589,10 @@ video {
   margin-bottom: auto;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
 .mb-20 {
   margin-bottom: 5rem;
 }
@@ -597,20 +601,8 @@ video {
   margin-bottom: 2rem;
 }
 
-.mt-20 {
-  margin-top: 5rem;
-}
-
-.mb-16 {
-  margin-bottom: 4rem;
-}
-
-.mb-10 {
-  margin-bottom: 2.5rem;
-}
-
-.mt-28 {
-  margin-top: 7rem;
+.mr-4 {
+  margin-right: 1rem;
 }
 
 .mt-32 {
@@ -633,12 +625,20 @@ video {
   height: 4rem;
 }
 
+.h-7 {
+  height: 1.75rem;
+}
+
 .h-\[37\.6rem\] {
   height: 37.6rem;
 }
 
 .h-full {
   height: 100%;
+}
+
+.h-6 {
+  height: 1.5rem;
 }
 
 .w-10 {
@@ -649,8 +649,16 @@ video {
   width: 16rem;
 }
 
+.w-7 {
+  width: 1.75rem;
+}
+
 .w-full {
   width: 100%;
+}
+
+.w-6 {
+  width: 1.5rem;
 }
 
 .grid-cols-2 {
@@ -673,10 +681,6 @@ video {
   grid-template-rows: 17.7rem;
 }
 
-.grid-rows-\[\] {
-  grid-template-rows: ;
-}
-
 .grid-rows-highlight {
   grid-template-rows: 20.4rem 15.9rem;
 }
@@ -691,6 +695,10 @@ video {
 
 .justify-end {
   justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: center;
 }
 
 .justify-between {
@@ -746,6 +754,10 @@ video {
      object-position: center;
 }
 
+.p-8 {
+  padding: 2rem;
+}
+
 .px-16 {
   padding-left: 4rem;
   padding-right: 4rem;
@@ -761,8 +773,16 @@ video {
   padding-bottom: 5rem;
 }
 
+.text-center {
+  text-align: center;
+}
+
 .font-raleway {
   font-family: Raleway, sans-serif;
+}
+
+.text-\[1\.4rem\] {
+  font-size: 1.4rem;
 }
 
 .text-\[1\.6rem\] {
@@ -777,6 +797,10 @@ video {
   font-size: 14.4rem;
 }
 
+.text-\[2\.4rem\] {
+  font-size: 2.4rem;
+}
+
 .text-\[3\.6rem\] {
   font-size: 3.6rem;
 }
@@ -785,12 +809,12 @@ video {
   font-size: 4.8rem;
 }
 
-.text-html {
-  font-size: 62.5%;
+.text-\[6\.4rem\] {
+  font-size: 6.4rem;
 }
 
-.text-\[2\.4rem\] {
-  font-size: 2.4rem;
+.text-html {
+  font-size: 62.5%;
 }
 
 .text-primary-text {
@@ -839,6 +863,16 @@ video {
   background-color: rgb(88 86 118 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(231 231 235 / var(--tw-text-opacity));
+}
+
+.btn--wind {
+  display: grid;
+  height: 3rem;
+  width: 3rem;
+  align-items: center;
+  justify-content: center;
+  --tw-bg-opacity: 1;
+  background-color: rgb(88 86 118 / var(--tw-bg-opacity));
 }
 
 /* Days component  */
