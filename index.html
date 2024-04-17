@@ -27,7 +27,7 @@
     class="font-raleway grid grid-rows-body grid-cols-body text-primary-text text-[1.6rem]"
   >
     <!-- Minor Section Start: Weather Display -->
-    <section class="bg-secondary-bg py-14 flex flex-col">
+    <section class="bg-secondary-bg py-14 flex flex-col relative">
       <!-- Header with search and target buttons -->
       <header class="flex justify-between px-16">
         <button class="h-16 w-64 bg-btn-bg1 shadow-lg">
@@ -80,6 +80,35 @@
         </svg>
         <p class="city">Helsinki</p>
       </div>
+
+      <!-- Search input and Search result Start -->
+      <div
+        class="absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-14 px-20"
+      >
+        <!-- Cancel Icon  -->
+        <div class="flex justify-end">
+          <svg class="fill-primary-text h-16 w-16">
+            <use xlink:href="./src/images/sprite.svg#icon-cross"></use>
+          </svg>
+        </div>
+
+        <form class="flex h-20 mt-10">
+          <div
+            class="border border-primary-text h-full w-[70%] flex items-center pl-3 mr-auto"
+          >
+            <svg class="fill-primary-text h-6 w-8 m-2">
+              <use xlink:href="./src/images/sprite.svg#icon-search"></use>
+            </svg>
+            <input
+              type="text"
+              class="h-full bg-transparent outline-none"
+              placeholder="search location"
+            />
+          </div>
+          <button class="bg-btn-bg3 h-full w-[8.6rem]">Search</button>
+        </form>
+      </div>
+      <!-- Search input and Search result End -->
     </section>
     <!-- Minor Section End: : Weather Display-->
 

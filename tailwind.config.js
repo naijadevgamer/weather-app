@@ -8,6 +8,7 @@ module.exports = {
         "secondary-bg": "#1E213A",
         "btn-bg1": " #6E707A",
         "btn-bg2": "#585676",
+        "btn-bg3": "#3C47E9",
         "primary-text": "#E7E7EB",
         "secondary-text": "#88869D",
         "dark-text": "#110E3C",
