@@ -20,7 +20,7 @@ body::-webkit-scrollbar-thumb:active {
 
 /* Round buttons component */
 .btn {
-  @apply h-16 w-16 rounded-[50%] shadow-lg text-[1.8rem];
+  @apply h-16 w-16 rounded-[50%] shadow-lg text-[1.8rem] font-bold;
 }
 .btn--locator {
   @apply bg-btn-bg1  grid justify-center items-center;

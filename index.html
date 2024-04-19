@@ -24,7 +24,7 @@
     <title>Weather App</title>
   </head>
   <body
-    class="font-raleway grid grid-rows-body grid-cols-body text-primary-text text-[1.6rem]"
+    class="font-raleway font-medium grid grid-rows-body grid-cols-body text-primary-text text-[1.6rem]"
   >
     <!-- Minor Section Start: Weather Display -->
     <section class="bg-secondary-bg py-14 flex flex-col relative">
@@ -62,7 +62,11 @@
         ><span class="text-[4.8rem] text-secondary-text">°C</span>
       </div>
       <!-- Weather Name  -->
-      <p class="mx-auto text-[3.6rem] my-auto">Shower</p>
+      <p
+        class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text"
+      >
+        Shower
+      </p>
 
       <!-- Weather Date  -->
       <div
@@ -78,12 +82,12 @@
         <svg class="fill-secondary-text h-10 w-10">
           <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
         </svg>
-        <p class="city">Helsinki</p>
+        <p class="city font-semibold">Helsinki</p>
       </div>
 
       <!-- Search input and Search result Start -->
       <div
-        class="absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-6 px-20"
+        class="hidden absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-6 px-20"
       >
         <!-- Cancel Icon  -->
         <div class="flex justify-end">
@@ -203,12 +207,12 @@
       <!-- Next Five Days End -->
 
       <!-- Today's Highlight Start -->
-      <div class="mt-32">
+      <div class="mt-32 font-bold">
         <h2 class="text-[2.4rem] mb-10">Today's Highlight</h2>
         <div class="grid grid-rows-highlight grid-cols-2 gap-20">
           <!-- Wind status -->
           <div class="bg-secondary-bg text-center p-8">
-            <h3>Wind status</h3>
+            <h3 class="font-medium">Wind status</h3>
 
             <!-- Wind value  -->
             <p class="text-[6.4rem]">
@@ -230,7 +234,7 @@
 
           <!-- Humidity -->
           <div class="bg-secondary-bg text-center p-8">
-            <h3>Humidity</h3>
+            <h3 class="font-medium">Humidity</h3>
 
             <!-- Humidity value  -->
             <p class="text-[6.4rem]">
@@ -256,7 +260,7 @@
 
           <!-- Visibility -->
           <div class="bg-secondary-bg text-center p-8">
-            <h3>Visibility</h3>
+            <h3 class="font-medium">Visibility</h3>
 
             <!-- Visibility value  -->
             <p class="text-[6.4rem]">
@@ -266,7 +270,7 @@
 
           <!-- Air pressure-->
           <div class="bg-secondary-bg text-center p-8">
-            <h3>Air pressure</h3>
+            <h3 class="font-medium">Air pressure</h3>
 
             <!-- Air pressure value  -->
             <p class="text-[6.4rem]">
