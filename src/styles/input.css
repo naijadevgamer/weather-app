@@ -18,6 +18,7 @@ body::-webkit-scrollbar-thumb:active {
   box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
 }
 
+/* Round buttons component */
 .btn {
   @apply h-16 w-16 rounded-[50%] shadow-lg text-[1.8rem];
 }
@@ -34,7 +35,7 @@ body::-webkit-scrollbar-thumb:active {
   @apply bg-btn-bg2  grid justify-center items-center h-12 w-12;
 }
 
-/* Days component  */
+/* Days component */
 .day {
   @apply bg-secondary-bg p-6 flex flex-col text-center;
 }
@@ -45,7 +46,25 @@ body::-webkit-scrollbar-thumb:active {
   @apply flex justify-between text-[1.6rem];
 }
 
+/* Search result */
+.result {
+  @apply h-24 px-3 w-full flex justify-between items-center border border-transparent hover:border-secondary-text cursor-pointer duration-150;
+}
+
+.result:not(:last-child) {
+  @apply mb-4;
+}
+
+.result-svg {
+  @apply fill-secondary-text h-7 w-7 opacity-0 group-hover:opacity-100 duration-150;
+}
+
+/* Custom CSS  */
 .colorized {
   filter: brightness(0) saturate(100%) invert(12%) sepia(35%) saturate(802%)
     hue-rotate(195deg) brightness(98%) contrast(87%);
+}
+
+.input-w {
+  width: calc(100% - 3rem);
 }

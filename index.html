@@ -83,30 +83,58 @@
 
       <!-- Search input and Search result Start -->
       <div
-        class="absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-14 px-20"
+        class="absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-6 px-20"
       >
         <!-- Cancel Icon  -->
         <div class="flex justify-end">
-          <svg class="fill-primary-text h-16 w-16">
+          <svg class="fill-primary-text h-12 w-12">
             <use xlink:href="./src/images/sprite.svg#icon-cross"></use>
           </svg>
         </div>
 
         <form class="flex h-20 mt-10">
           <div
-            class="border border-primary-text h-full w-[70%] flex items-center pl-3 mr-auto"
+            class="border border-primary-text h-full w-[75%] flex items-center pl-4 mr-auto"
           >
-            <svg class="fill-primary-text h-6 w-8 m-2">
+            <svg class="fill-secondary-text h-6 w-6 mr-4">
               <use xlink:href="./src/images/sprite.svg#icon-search"></use>
             </svg>
             <input
               type="text"
-              class="h-full bg-transparent outline-none"
+              class="h-full input-w bg-transparent outline-none placeholder:text-secondary-text"
               placeholder="search location"
             />
           </div>
-          <button class="bg-btn-bg3 h-full w-[8.6rem]">Search</button>
+          <button class="bg-btn-bg3 h-full w-[22%]">Search</button>
         </form>
+
+        <!-- Search-result -->
+        <ul class="results-wrapper mt-20">
+          <li class="result group">
+            <p>London</p>
+            <svg class="result-svg">
+              <use
+                xlink:href="./src/images/sprite.svg#icon-chevron-small-right"
+              ></use>
+            </svg>
+          </li>
+          <li class="result group">
+            <p>Barcelona</p>
+            <svg class="result-svg">
+              <use
+                xlink:href="./src/images/sprite.svg#icon-chevron-small-right"
+              ></use>
+            </svg>
+          </li>
+          <li class="result group">
+            <p>Long-beach</p>
+            <svg class="result-svg">
+              <use
+                xlink:href="./src/images/sprite.svg#icon-chevron-small-right"
+              ></use>
+            </svg>
+          </li>
+        </ul>
       </div>
       <!-- Search input and Search result End -->
     </section>
