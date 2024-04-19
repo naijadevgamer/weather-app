@@ -979,14 +979,6 @@ video {
   transition-duration: 200ms;
 }
 
-.ease-out {
-  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
-}
-
-.ease-in-out {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
 body::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -1145,12 +1137,6 @@ body::-webkit-scrollbar-thumb:active {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
-/* Transition timing function  */
-
-.ease-custom {
-  transition-timing-function: cubic-bezier(0.785, 0.135, 0.15, 0.86);
-}
-
 .placeholder\:text-secondary-text::-moz-placeholder {
   --tw-text-opacity: 1;
   color: rgb(136 134 157 / var(--tw-text-opacity));
@@ -1172,6 +1158,11 @@ body::-webkit-scrollbar-thumb:active {
 }
 
 @media not all and (min-width: 1200px) {
+  .max-tl\:px-16 {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+
   .max-tl\:text-land {
     font-size: 58%;
   }
