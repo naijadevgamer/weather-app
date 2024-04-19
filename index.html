@@ -86,12 +86,12 @@
       </div>
 
       <!-- Search input and Search result Start -->
-      <div
-        class="hidden absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-6 px-20"
+      <aside
+        class="absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-6 px-20"
       >
         <!-- Cancel Icon  -->
         <div class="flex justify-end">
-          <svg class="fill-primary-text h-12 w-12">
+          <svg class="fill-primary-text h-12 w-12 cursor-pointer">
             <use xlink:href="./src/images/sprite.svg#icon-cross"></use>
           </svg>
         </div>
@@ -109,7 +109,11 @@
               placeholder="search location"
             />
           </div>
-          <button class="bg-btn-bg3 h-full w-[22%]">Search</button>
+          <button
+            class="font-semibold bg-btn-bg3 h-full w-[22%] hover:bg-btn-bg3-h duration-150 shadow-lg"
+          >
+            Search
+          </button>
         </form>
 
         <!-- Search-result -->
@@ -139,7 +143,7 @@
             </svg>
           </li>
         </ul>
-      </div>
+      </aside>
       <!-- Search input and Search result End -->
     </section>
     <!-- Minor Section End: : Weather Display-->

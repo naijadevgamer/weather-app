@@ -20,16 +20,16 @@ body::-webkit-scrollbar-thumb:active {
 
 /* Round buttons component */
 .btn {
-  @apply h-16 w-16 rounded-[50%] shadow-lg text-[1.8rem] font-bold;
+  @apply h-16 w-16 rounded-[50%] shadow-lg text-[1.8rem] font-bold duration-150;
 }
 .btn--locator {
-  @apply bg-btn-bg1  grid justify-center items-center;
+  @apply bg-btn-bg1  grid justify-center items-center hover:bg-btn-bg1-h;
 }
 .btn--celcius {
-  @apply bg-primary-text text-dark-text;
+  @apply bg-primary-text text-dark-text hover:bg-primary-text-h;
 }
 .btn--farenheit {
-  @apply bg-btn-bg2 text-primary-text;
+  @apply bg-btn-bg2 text-primary-text hover:bg-btn-bg2-h;
 }
 .btn--wind {
   @apply bg-btn-bg2  grid justify-center items-center h-12 w-12;

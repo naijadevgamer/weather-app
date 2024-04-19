@@ -633,10 +633,6 @@ video {
   display: grid;
 }
 
-.hidden {
-  display: none;
-}
-
 .h-10 {
   height: 2.5rem;
 }
@@ -703,6 +699,10 @@ video {
 
 .w-full {
   width: 100%;
+}
+
+.cursor-pointer {
+  cursor: pointer;
 }
 
 .grid-cols-2 {
@@ -920,16 +920,16 @@ video {
   font-size: 62.5%;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
 .font-medium {
   font-weight: 500;
 }
 
 .font-semibold {
   font-weight: 600;
-}
-
-.font-bold {
-  font-weight: 700;
 }
 
 .text-primary-text {
@@ -956,6 +956,10 @@ video {
 .outline-none {
   outline: 2px solid transparent;
   outline-offset: 2px;
+}
+
+.duration-150 {
+  transition-duration: 150ms;
 }
 
 body::-webkit-scrollbar {
@@ -987,6 +991,7 @@ body::-webkit-scrollbar-thumb:active {
   --tw-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  transition-duration: 150ms;
 }
 
 .btn--locator {
@@ -997,6 +1002,11 @@ body::-webkit-scrollbar-thumb:active {
   background-color: rgb(110 112 122 / var(--tw-bg-opacity));
 }
 
+.btn--locator:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(85 86 94 / var(--tw-bg-opacity));
+}
+
 .btn--celcius {
   --tw-bg-opacity: 1;
   background-color: rgb(231 231 235 / var(--tw-bg-opacity));
@@ -1004,11 +1014,21 @@ body::-webkit-scrollbar-thumb:active {
   color: rgb(17 14 60 / var(--tw-text-opacity));
 }
 
+.btn--celcius:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(202 202 211 / var(--tw-bg-opacity));
+}
+
 .btn--farenheit {
   --tw-bg-opacity: 1;
   background-color: rgb(88 86 118 / var(--tw-bg-opacity));
   --tw-text-opacity: 1;
   color: rgb(231 231 235 / var(--tw-text-opacity));
+}
+
+.btn--farenheit:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(66 64 89 / var(--tw-bg-opacity));
 }
 
 .btn--wind {
@@ -1101,6 +1121,11 @@ body::-webkit-scrollbar-thumb:active {
 .placeholder\:text-secondary-text::placeholder {
   --tw-text-opacity: 1;
   color: rgb(136 134 157 / var(--tw-text-opacity));
+}
+
+.hover\:bg-btn-bg3-h:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(24 37 216 / var(--tw-bg-opacity));
 }
 
 @media not all and (min-width: 1200px) {

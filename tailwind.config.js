@@ -6,10 +6,14 @@ module.exports = {
       colors: {
         "primary-bg": "#100E1D",
         "secondary-bg": "#1E213A",
-        "btn-bg1": " #6E707A",
+        "btn-bg1": "#6E707A",
+        "btn-bg1-h": "#55565e", // hover
         "btn-bg2": "#585676",
+        "btn-bg2-h": "#424059", // hover
         "btn-bg3": "#3C47E9",
+        "btn-bg3-h": "#1825d8", // hover
         "primary-text": "#E7E7EB",
+        "primary-text-h": "#cacad3", // hover
         "secondary-text": "#88869D",
         "dark-text": "#110E3C",
         "tertiary-text": "#A09FB1",
