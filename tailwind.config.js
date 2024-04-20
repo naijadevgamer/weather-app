@@ -32,16 +32,22 @@ module.exports = {
       gridTemplateColumns: {
         // Body layout
         body: "8fr, 17fr",
+        "body-tp": "10fr, 15fr",
+        days: "repeat(auto-fit, minmax(13rem, 1fr))",
+        highlight: "repeat(auto-fit, minmax(30rem, 1fr))",
+        "highlight-p": "repeat(auto-fit, minmax(100%, 1fr))",
       },
       gridTemplateRows: {
         // Body layout
         highlight: "20.4rem, 15.9rem",
-        body: "minmax(100vh, 102.3rem)",
+        body: "minmax(102.3rem, 1fr)",
+        "body-p": "minmax(100vh, max-content), max-content",
       },
       screens: {
         "large-desktop": "1800px", // 1800px
         tl: "1200px", // tablet-landscape
         tp: "900px", // tablet-portrait
+        p: "600px", // phone
         sp: "300px", // small-phone
       },
       keyframes: {

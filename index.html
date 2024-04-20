@@ -24,10 +24,12 @@
     <title>Weather App</title>
   </head>
   <body
-    class="font-raleway font-medium grid grid-rows-body grid-cols-body text-primary-text text-[1.6rem]"
+    class="font-raleway font-medium grid grid-rows-body grid-cols-body text-primary-text text-[1.6rem] max-tp:grid-cols-body-tp max-p:grid-rows-body-p max-p:grid-cols-1"
   >
     <!-- Minor Section Start: Weather Display -->
-    <section class="bg-secondary-bg py-14 flex flex-col relative">
+    <section
+      class="bg-secondary-bg py-14 flex flex-col relative max-tp:pt-7 max-tp:pb-32"
+    >
       <!-- Radio input for slide functionality -->
       <input class="hidden" type="radio" name="search-radio" id="search-open" />
       <input
@@ -38,7 +40,7 @@
       />
 
       <!-- Header with search and target buttons -->
-      <header class="flex justify-between px-16">
+      <header class="flex justify-between px-16 max-tl:px-7">
         <label
           class="h-16 w-64 bg-btn-bg1 shadow-lg cursor-pointer hover:bg-btn-bg1-h grid justify-center content-center"
           for="search-open"
@@ -54,7 +56,7 @@
 
       <!-- Weather image  -->
       <div
-        class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto"
+        class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
       >
         <img
           class="absolute object-cover left-0 top-0 object-center h-full w-full colorized"
@@ -62,27 +64,27 @@
           alt="Background image"
         />
         <img
-          class="relative z-10"
+          class="relative z-10 max-p:w-[40%]"
           src="src/images/Shower.png"
           alt="Weather image"
         />
       </div>
 
       <!-- Weather Temp Value  -->
-      <div class="mx-auto px-16">
+      <div class="mx-auto px-16 max-tl:px-7">
         <span class="text-[14.4rem]">15</span
         ><span class="text-[4.8rem] text-secondary-text">°C</span>
       </div>
       <!-- Weather Name  -->
       <p
-        class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text"
+        class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
       >
         Shower
       </p>
 
       <!-- Weather Date  -->
       <div
-        class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16"
+        class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto"
       >
         <p>Today</p>
         <span class="mx-4">•</span>
@@ -90,7 +92,9 @@
       </div>
 
       <!-- Weather Location  -->
-      <div class="text-secondary-text mx-auto flex items-center px-16">
+      <div
+        class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
+      >
         <svg class="fill-secondary-text h-10 w-10">
           <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
         </svg>
@@ -99,7 +103,7 @@
 
       <!-- Search input and Search result Start -->
       <aside
-        class="absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-6 px-20 -translate-x-full duration-200"
+        class="absolute z-10 bg-secondary-bg top-0 left-0 w-full h-full py-7 px-20 -translate-x-full duration-200 max-tl:px-7 max-p:fixed"
       >
         <!-- Cancel Icon  -->
         <div class="flex justify-end">
@@ -112,7 +116,7 @@
 
         <form class="flex h-20 mt-10">
           <div
-            class="border border-primary-text h-full w-[75%] flex items-center pl-4 mr-auto"
+            class="border border-primary-text h-full w-[75%] flex items-center pl-4 mr-auto max-tl:w-[70%]"
           >
             <svg class="fill-secondary-text h-6 w-6 mr-4">
               <use xlink:href="./src/images/sprite.svg#icon-search"></use>
@@ -124,7 +128,7 @@
             />
           </div>
           <button
-            class="font-semibold bg-btn-bg3 h-full w-[22%] hover:bg-btn-bg3-h duration-150 shadow-lg"
+            class="font-semibold bg-btn-bg3 h-full w-[22%] hover:bg-btn-bg3-h duration-150 shadow-lg max-tl:w-[27%]"
           >
             Search
           </button>
@@ -163,15 +167,19 @@
     <!-- Minor Section End: : Weather Display-->
 
     <!-- Main Start: Next Five Days and Today's Highlight -->
-    <main class="bg-primary-bg px-48 py-14 max-tl:px-16">
+    <main
+      class="bg-primary-bg px-48 py-14 max-tp:pt-7 max-tl:px-16 max-p:px-10"
+    >
       <!-- Temp Degree settings -->
-      <div class="flex justify-end gap-6 mb-20">
+      <div class="flex justify-end gap-6 mb-20 max-p:mb-10">
         <button class="btn btn--celcius">°C</button>
         <button class="btn btn--farenheit">°F</button>
       </div>
 
       <!-- Next Five Days Start-->
-      <div class="grid grid-rows-[17.7rem] grid-cols-5 gap-8">
+      <div
+        class="grid grid-cols-5 gap-8 auto-rows-[17.7rem] max-tl:grid-cols-days max-p:px-10"
+      >
         <!-- Day 1: Tomorrow -->
         <div class="day">
           <p class="day__name">Tomorrow</p>
@@ -225,9 +233,11 @@
       <!-- Next Five Days End -->
 
       <!-- Today's Highlight Start -->
-      <div class="mt-32 font-bold">
+      <div class="mt-32 font-bold max-p:mt-20">
         <h2 class="text-[2.4rem] mb-10">Today's Highlight</h2>
-        <div class="grid grid-rows-highlight grid-cols-2 gap-20">
+        <div
+          class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
+        >
           <!-- Wind status -->
           <div class="bg-secondary-bg text-center p-8">
             <h3 class="font-medium">Wind status</h3>
@@ -260,13 +270,14 @@
             </p>
 
             <!-- Humidity range bar  -->
-            <div class="w-[22.9rem] mx-auto text-[1.2rem] text-tertiary-text">
+            <div
+              class="w-[22.9rem] mx-auto text-[1.2rem] text-tertiary-text max-tl:w-[90%]"
+            >
               <p class="flex justify-between px-1">
                 <span class="inline-block">0</span>
                 <span class="inline-block">50</span>
                 <span class="inline-block">100</span>
               </p>
-
               <div
                 class="w-full h-[8px] rounded-3xl overflow-hidden bg-primary-text"
               >
