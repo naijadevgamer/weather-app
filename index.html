@@ -30,7 +30,17 @@
     <section
       class="bg-secondary-bg py-14 flex flex-col relative max-tp:pt-7 max-tp:pb-32"
     >
-      <div class="loader mx-auto my-60"></div>
+      <!-- Loader  -->
+      <!-- <div class="loader mx-auto"></div> -->
+      <!-- Error message  -->
+      <div class="error">
+        <div>
+          <svg>
+            <use xlink:href="./src/images/sprite.svg#icon-alert-triangle"></use>
+          </svg>
+        </div>
+        <p>No recipes found for your query. Please try again!</p>
+      </div>
       <!-- Radio input for slide functionality -->
       <input class="hidden" type="radio" name="search-radio" id="search-open" />
       <input
