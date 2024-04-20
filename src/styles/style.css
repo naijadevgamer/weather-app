@@ -1270,6 +1270,10 @@ body::-webkit-scrollbar-thumb:active {
     grid-template-rows: minmax(100vh, max-content) max-content;
   }
 
+  .max-p\:justify-center {
+    justify-content: center;
+  }
+
   .max-p\:gap-5 {
     gap: 1.25rem;
   }
@@ -1282,6 +1286,10 @@ body::-webkit-scrollbar-thumb:active {
     gap: 2.5rem;
   }
 
+  .max-p\:gap-4 {
+    gap: 1rem;
+  }
+
   .max-p\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
@@ -1290,6 +1298,10 @@ body::-webkit-scrollbar-thumb:active {
   .max-p\:px-7 {
     padding-left: 1.75rem;
     padding-right: 1.75rem;
+  }
+
+  .max-p\:text-center {
+    text-align: center;
   }
 }
 
