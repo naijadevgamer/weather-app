@@ -584,6 +584,11 @@ video {
   margin-right: auto;
 }
 
+.my-60 {
+  margin-top: 15rem;
+  margin-bottom: 15rem;
+}
+
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
@@ -1137,6 +1142,44 @@ body::-webkit-scrollbar-thumb:active {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+/* Loading animation  */
+
+/* HTML: <div class="loader"></div> */
+
+.loader {
+  width: 100px;
+  --b: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 1px;
+  background: conic-gradient(#0000 10%, #e7e7eb) content-box;
+  mask: repeating-conic-gradient(#0000 0deg, #000 1deg 20deg, #0000 21deg 36deg),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b))
+    );
+  -webkit-mask: repeating-conic-gradient(
+      #0000 0deg,
+      #000 1deg 20deg,
+      #0000 21deg 36deg
+    ),
+    radial-gradient(
+      farthest-side,
+      #0000 calc(100% - var(--b) - 1px),
+      #000 calc(100% - var(--b))
+    );
+  -webkit-mask-composite: destination-in;
+  mask-composite: intersect;
+  animation: l4 1s infinite steps(10);
+}
+
+@keyframes l4 {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
 .placeholder\:text-secondary-text::-moz-placeholder {
   --tw-text-opacity: 1;
   color: rgb(136 134 157 / var(--tw-text-opacity));
@@ -1268,18 +1311,6 @@ body::-webkit-scrollbar-thumb:active {
 
   .max-p\:grid-rows-body-p {
     grid-template-rows: minmax(100vh, max-content) max-content;
-  }
-
-  .max-p\:justify-center {
-    justify-content: center;
-  }
-
-  .max-p\:gap-5 {
-    gap: 1.25rem;
-  }
-
-  .max-p\:gap-8 {
-    gap: 2rem;
   }
 
   .max-p\:gap-10 {

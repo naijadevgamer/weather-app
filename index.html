@@ -30,6 +30,7 @@
     <section
       class="bg-secondary-bg py-14 flex flex-col relative max-tp:pt-7 max-tp:pb-32"
     >
+      <div class="loader mx-auto my-60"></div>
       <!-- Radio input for slide functionality -->
       <input class="hidden" type="radio" name="search-radio" id="search-open" />
       <input
@@ -40,7 +41,7 @@
       />
 
       <!-- Header with search and target buttons -->
-      <header class="flex justify-between px-16 max-tl:px-7">
+      <!-- <header class="flex justify-between px-16 max-tl:px-7">
         <label
           class="h-16 w-64 bg-btn-bg1 shadow-lg cursor-pointer hover:bg-btn-bg1-h grid justify-center content-center"
           for="search-open"
@@ -52,10 +53,10 @@
             <use xlink:href="./src/images/sprite.svg#icon-target"></use>
           </svg>
         </button>
-      </header>
+      </header> -->
 
       <!-- Weather image  -->
-      <div
+      <!-- <div
         class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
       >
         <img
@@ -68,38 +69,38 @@
           src="src/images/Shower.png"
           alt="Weather image"
         />
-      </div>
+      </div> -->
 
       <!-- Weather Temp Value  -->
-      <div class="mx-auto px-16 max-tl:px-7">
+      <!-- <div class="mx-auto px-16 max-tl:px-7">
         <span class="text-[14.4rem]">15</span
         ><span class="text-[4.8rem] text-secondary-text">°C</span>
-      </div>
+      </div> -->
       <!-- Weather Name  -->
-      <p
+      <!-- <p
         class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
       >
         Shower
-      </p>
+      </p> -->
 
       <!-- Weather Date  -->
-      <div
+      <!-- <div
         class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto"
       >
         <p>Today</p>
         <span class="mx-4">•</span>
         <p>Fri, 5, jun</p>
-      </div>
+      </div> -->
 
       <!-- Weather Location  -->
-      <div
+      <!-- <div
         class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
       >
         <svg class="fill-secondary-text h-10 w-10">
           <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
         </svg>
         <p class="city font-semibold">Helsinki</p>
-      </div>
+      </div> -->
 
       <!-- Search input and Search result Start -->
       <aside
@@ -168,17 +169,18 @@
 
     <!-- Main Start: Next Five Days and Today's Highlight -->
     <main class="bg-primary-bg px-48 py-14 max-tp:pt-7 max-tl:px-16 max-p:px-7">
+      <div class="loader mx-auto my-60"></div>
       <!-- Temp Degree settings -->
-      <div
+      <!-- <div
         class="flex justify-end gap-6 mb-20 max-p:mb-10 max-p:px-10 max-p:gap-4"
       >
         <button class="btn btn--celcius">°C</button>
         <button class="btn btn--farenheit">°F</button>
-      </div>
+      </div> -->
 
       <!-- Next Five Days Start-->
       <div
-        class="grid grid-cols-5 gap-8 auto-rows-[17.7rem] max-tl:grid-cols-days max-p:px-10"
+        class="hidden grid-cols-5 gap-8 auto-rows-[17.7rem] max-tl:grid-cols-days max-p:px-10"
       >
         <!-- Day 1: Tomorrow -->
         <div class="day">
@@ -233,7 +235,7 @@
       <!-- Next Five Days End -->
 
       <!-- Today's Highlight Start -->
-      <div class="mt-32 font-bold max-p:mt-20">
+      <div class="hidden mt-32 font-bold max-p:mt-20">
         <h2 class="text-[2.4rem] mb-10 max-p:text-center">Today's Highlight</h2>
         <div
           class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
