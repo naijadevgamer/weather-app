@@ -1124,6 +1124,42 @@ body::-webkit-scrollbar-thumb:active {
   opacity: 1;
 }
 
+/* Error component */
+
+.error {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5rem;
+  display: flex;
+  max-width: 40rem;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
+}
+
+.error svg {
+  height: 3rem;
+  width: 3rem;
+  --tw-translate-y: -0.25rem;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  fill: #ffec65;
+}
+
+.error p {
+  margin-left: 1.5rem;
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+/* Search component functionality  */
+
+#search-open:checked ~ aside {
+  --tw-translate-x: 0px;
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+
 /* Custom CSS  */
 
 .colorized {
@@ -1133,13 +1169,6 @@ body::-webkit-scrollbar-thumb:active {
 
 .input-w {
   width: calc(100% - 3rem);
-}
-
-/* Search component functionality  */
-
-#search-open:checked ~ aside {
-  --tw-translate-x: 0px;
-  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
 /* Loading animation  */
@@ -1178,26 +1207,6 @@ body::-webkit-scrollbar-thumb:active {
   to {
     transform: rotate(1turn);
   }
-}
-
-.error {
-  max-width: 40rem;
-  padding: 5rem 4rem;
-  display: flex;
-}
-
-.error svg {
-  height: 3rem;
-  width: 3rem;
-  fill: #ffec65;
-  transform: translateY(-0.3rem);
-}
-
-.error p {
-  margin-left: 1.5rem;
-  font-size: 1.8rem;
-  line-height: 1.5;
-  font-weight: 600;
 }
 
 .placeholder\:text-secondary-text::-moz-placeholder {

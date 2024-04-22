@@ -51,15 +51,14 @@ module.exports = {
         sp: "300px", // small-phone
       },
       keyframes: {
-        // Menu bar
-        go: {
-          from: { transform: "translateX(0%)" },
-          to: { transform: "translateX(105%)" },
+        // loading keyframe
+        l4: {
+          to: { transform: "rotate(1turn)" },
         },
       },
       animation: {
-        // Menu bar animations
-        go: "go 0.3s cubic-bezier(1, 0, 0, 1) both",
+        // loading animation
+        l4: "l4 1s infinite steps(10)",
       },
     },
   },
