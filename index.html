@@ -20,7 +20,10 @@
       href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="src/styles/style.css" />
+    <!-- <link rel="stylesheet" href="src/styles/style.css" /> -->
+    <script defer src="bundle.js"></script>
+    <!-- <script defer type="module" src="src/js/controller.js"></script> -->
+
     <title>Weather App</title>
   </head>
   <body
@@ -33,14 +36,14 @@
       <!-- Loader  -->
       <!-- <div class="loader mx-auto"></div> -->
       <!-- Error message  -->
-      <div class="error">
+      <!-- <div class="error">
         <div>
           <svg>
             <use xlink:href="./src/images/sprite.svg#icon-alert-triangle"></use>
           </svg>
         </div>
         <p>No recipes found for your query. Please try again!</p>
-      </div>
+      </div> -->
       <!-- Radio input for slide functionality -->
       <input class="hidden" type="radio" name="search-radio" id="search-open" />
       <input
@@ -51,7 +54,7 @@
       />
 
       <!-- Header with search and target buttons -->
-      <!-- <header class="flex justify-between px-16 max-tl:px-7">
+      <header class="flex justify-between px-16 max-tl:px-7">
         <label
           class="h-16 w-64 bg-btn-bg1 shadow-lg cursor-pointer hover:bg-btn-bg1-h grid justify-center content-center"
           for="search-open"
@@ -63,10 +66,10 @@
             <use xlink:href="./src/images/sprite.svg#icon-target"></use>
           </svg>
         </button>
-      </header> -->
+      </header>
 
       <!-- Weather image  -->
-      <!-- <div
+      <div
         class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
       >
         <img
@@ -79,38 +82,38 @@
           src="src/images/Shower.png"
           alt="Weather image"
         />
-      </div> -->
+      </div>
 
       <!-- Weather Temp Value  -->
-      <!-- <div class="mx-auto px-16 max-tl:px-7">
+      <div class="mx-auto px-16 max-tl:px-7">
         <span class="text-[14.4rem]">15</span
         ><span class="text-[4.8rem] text-secondary-text">°C</span>
-      </div> -->
+      </div>
       <!-- Weather Name  -->
-      <!-- <p
+      <p
         class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
       >
         Shower
-      </p> -->
+      </p>
 
       <!-- Weather Date  -->
-      <!-- <div
+      <div
         class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto"
       >
         <p>Today</p>
         <span class="mx-4">•</span>
         <p>Fri, 5, jun</p>
-      </div> -->
+      </div>
 
       <!-- Weather Location  -->
-      <!-- <div
+      <div
         class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
       >
         <svg class="fill-secondary-text h-10 w-10">
           <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
         </svg>
         <p class="city font-semibold">Helsinki</p>
-      </div> -->
+      </div>
 
       <!-- Search input and Search result Start -->
       <aside
