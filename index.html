@@ -10,19 +10,18 @@
       content="width=device-width, initial-scale=1,
   maximum-scale=5"
     />
-    <link rel="icon" href="devchallenges.png" />
-    <link
+    <link rel="icon" href="src/images/devchallenges.png" />
+    <!-- <link
       rel="shortcut icon"
       type="image/x-icon"
       href="https://devchallenges.io/"
-    />
+    /> -->
     <link
       href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
     <!-- <link rel="stylesheet" href="src/styles/style.css" /> -->
     <script defer src="bundle.js"></script>
-    <!-- <script defer type="module" src="src/js/controller.js"></script> -->
 
     <title>Weather App</title>
   </head>
@@ -182,18 +181,18 @@
 
     <!-- Main Start: Next Five Days and Today's Highlight -->
     <main class="bg-primary-bg px-48 py-14 max-tp:pt-7 max-tl:px-16 max-p:px-7">
-      <div class="loader mx-auto my-60"></div>
+      <!-- <div class="loader mx-auto my-60"></div> -->
       <!-- Temp Degree settings -->
-      <!-- <div
+      <div
         class="flex justify-end gap-6 mb-20 max-p:mb-10 max-p:px-10 max-p:gap-4"
       >
         <button class="btn btn--celcius">°C</button>
         <button class="btn btn--farenheit">°F</button>
-      </div> -->
+      </div>
 
       <!-- Next Five Days Start-->
       <div
-        class="hidden grid-cols-5 gap-8 auto-rows-[17.7rem] max-tl:grid-cols-days max-p:px-10"
+        class="grid grid-cols-5 gap-8 auto-rows-[17.7rem] max-tl:grid-cols-days max-p:px-10"
       >
         <!-- Day 1: Tomorrow -->
         <div class="day">
@@ -248,7 +247,7 @@
       <!-- Next Five Days End -->
 
       <!-- Today's Highlight Start -->
-      <div class="hidden mt-32 font-bold max-p:mt-20">
+      <div class="mt-32 font-bold max-p:mt-20">
         <h2 class="text-[2.4rem] mb-10 max-p:text-center">Today's Highlight</h2>
         <div
           class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"

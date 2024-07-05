@@ -40,7 +40,7 @@ module.exports = {
       gridTemplateRows: {
         // Body layout
         highlight: "20.4rem, 15.9rem",
-        body: "minmax(102.3rem, 1fr)",
+        body: "minmax(102.3rem, 100vh)",
         "body-p": "minmax(100vh, max-content), max-content",
       },
       screens: {
