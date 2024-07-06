@@ -1,13 +1,11 @@
 import "../styles/input.css";
 import * as model from "./model";
 
-console.log("Hello, Webpack with TypeScript and Tailwind CSS!");
-
-const controlCurrentWeather = async function () {
+const controlCurrentLocationWeather = async function () {
   try {
     if (navigator.geolocation)
       navigator.geolocation.getCurrentPosition(
-        model.loadCurrentWeather,
+        model.loadCurrentLocationWeather,
         function () {
           throw new Error("Could not get your position");
         }
@@ -17,4 +15,18 @@ const controlCurrentWeather = async function () {
   }
 };
 
-controlCurrentWeather();
+controlCurrentLocationWeather();
+
+const controlSearchResult = async function () {
+  try {
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+const controlForecast = async function () {
+  try {
+  } catch (err) {
+    console.error(err);
+  }
+};
