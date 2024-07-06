@@ -24,7 +24,7 @@ module.exports = {
         use: ["style-loader", "css-loader", "postcss-loader"],
       },
       {
-        test: /\.(png|jpe?g|gif|svg)$/i,
+        test: /\.(png|jpe?g|gif|svg|ico)$/i,
         type: "asset/resource",
       },
       {
@@ -48,7 +48,7 @@ module.exports = {
                   {
                     tag: "link",
                     attribute: "href",
-                    type: "image/x-icon",
+                    type: "src",
                   },
                 ],
               },
