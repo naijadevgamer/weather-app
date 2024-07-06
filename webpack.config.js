@@ -45,6 +45,11 @@ module.exports = {
                     attribute: "xlink:href",
                     type: "src",
                   },
+                  {
+                    tag: "link",
+                    attribute: "href",
+                    type: "image/x-icon",
+                  },
                 ],
               },
             },
