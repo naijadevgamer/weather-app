@@ -58,23 +58,84 @@ const createWeatherObject = (data: any): WeatherObject => {
 };
 
 // Function to create forecast object
+// const createForecastObject = (data: any): ForecastObject[] => {
+//   return data.list.map((item: any) => ({
+//     city: data.city.name,
+//     temp: ((item.main.temp - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
+//     maxTemp: ((item.main.temp_max - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
+//     minTemp: ((item.main.temp_min - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
+//     weatherIcon: item.weather[0].icon,
+//     weatherName: item.weather[0].main,
+//     weatherId: item.weather[0].id,
+//     date: formatDate(item.dt),
+//     windStatus: item.wind.speed * 2.237, // meters/second to miles/hour
+//     windDirection: item.wind.deg, // degrees
+//     humidity: item.main.humidity, // percentage
+//     visibility: item.visibility / 1609.34, // meters to miles
+//     airPressure: item.main.pressure, // hPa to mb (they are equivalent)
+//   }));
+// };
+
+// Function to create forecast object for each day
 const createForecastObject = (data: any): ForecastObject[] => {
-  return data.list.map((item: any) => ({
-    city: data.city.name,
-    temp: ((item.main.temp - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-    maxTemp: ((item.main.temp_max - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-    minTemp: ((item.main.temp_min - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-    weatherIcon: item.weather[0].icon,
-    weatherName: item.weather[0].main,
-    weatherId: item.weather[0].id,
-    date: formatDate(item.dt),
-    windStatus: item.wind.speed * 2.237, // meters/second to miles/hour
-    windDirection: item.wind.deg, // degrees
-    humidity: item.main.humidity, // percentage
-    visibility: item.visibility / 1609.34, // meters to miles
-    airPressure: item.main.pressure, // hPa to mb (they are equivalent)
-  }));
+  const dailyData: { [key: string]: ForecastObject } = {};
+
+  data.list.forEach((item: any) => {
+    const date = new Date(item.dt * 1000).toLocaleDateString("en-US");
+
+    if (!dailyData[date]) {
+      dailyData[date] = {
+        city: data.city.name,
+        temp: ((item.main.temp - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
+        maxTemp: ((item.main.temp_max - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
+        minTemp: ((item.main.temp_min - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
+        weatherIcon: item.weather[0].icon,
+        weatherName: item.weather[0].main,
+        weatherId: item.weather[0].id,
+        date: formatDate(item.dt),
+        windStatus: item.wind.speed * 2.237, // meters/second to miles/hour
+        windDirection: item.wind.deg, // degrees
+        humidity: item.main.humidity, // percentage
+        visibility: item.visibility / 1609.34, // meters to miles
+        airPressure: item.main.pressure, // hPa to mb (they are equivalent)
+      };
+    } else {
+      dailyData[date].temp += ((item.main.temp - 273.15) * 9) / 5 + 32;
+      dailyData[date].maxTemp = Math.max(
+        dailyData[date].maxTemp,
+        ((item.main.temp_max - 273.15) * 9) / 5 + 32
+      );
+      dailyData[date].minTemp = Math.min(
+        dailyData[date].minTemp,
+        ((item.main.temp_min - 273.15) * 9) / 5 + 32
+      );
+      dailyData[date].windStatus += item.wind.speed * 2.237;
+      dailyData[date].humidity += item.main.humidity;
+      dailyData[date].visibility += item.visibility / 1609.34;
+      dailyData[date].airPressure += item.main.pressure;
+    }
+  });
+
+  const forecastArray = Object.values(dailyData).map((forecast) => {
+    const entriesCount = data.list.filter(
+      (item: any) =>
+        new Date(item.dt * 1000).toLocaleDateString("en-US") === forecast.date
+    ).length;
+
+    if (entriesCount > 0) {
+      forecast.temp /= entriesCount;
+      forecast.windStatus /= entriesCount;
+      forecast.humidity /= entriesCount;
+      forecast.visibility /= entriesCount;
+      forecast.airPressure /= entriesCount;
+    }
+
+    return forecast;
+  });
+
+  return forecastArray;
 };
+
 const getWeatherIcon = (data: WeatherObject) => {
   if (data.weatherIcon === "11d" || data.weatherIcon === "11n")
     return "Thunderstorm";
