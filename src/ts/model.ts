@@ -30,14 +30,14 @@ type WeatherObject = {
   tempC: number; // Celsius
   tempF: number; // Celsius
   weatherIcon: string;
-  weatherDescription: string;
-  weatherID: number;
+  weatherName: string;
+  weatherId: number;
   date: string; // Unix timestamp
-  windStatus: number; // meters/second
+  windStatus: number; // miles/hour
   windDirection: number; // degrees
   humidity: number; // percentage
-  visibility: number; // kilometers
-  airPressure: number; // hPa
+  visibility: number; // miles
+  airPressure: number; // mb (hPa)
 };
 
 const createWeatherObject = (data: any): WeatherObject => {
@@ -46,8 +46,8 @@ const createWeatherObject = (data: any): WeatherObject => {
     tempC: data.main.temp - 273.15, // Converting Kelvin to Celsius
     tempF: ((data.main.temp - 273.15) * 9) / 5 + 32, // Converting Kelvin to Fahrenheit
     weatherIcon: data.weather[0].icon,
-    weatherDescription: data.weather[0].description,
-    weatherID: data.weather[0].id,
+    weatherName: data.weather[0].main,
+    weatherId: data.weather[0].id,
     date: formatDate(data.dt),
     windStatus: data.wind.speed * 2.237, // Converting meters/second to mph
     windDirection: data.wind.deg, // degrees
@@ -57,27 +57,8 @@ const createWeatherObject = (data: any): WeatherObject => {
   };
 };
 
-// Function to create forecast object
-// const createForecastObject = (data: any): ForecastObject[] => {
-//   return data.list.map((item: any) => ({
-//     city: data.city.name,
-//     temp: ((item.main.temp - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-//     maxTemp: ((item.main.temp_max - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-//     minTemp: ((item.main.temp_min - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-//     weatherIcon: item.weather[0].icon,
-//     weatherName: item.weather[0].main,
-//     weatherId: item.weather[0].id,
-//     date: formatDate(item.dt),
-//     windStatus: item.wind.speed * 2.237, // meters/second to miles/hour
-//     windDirection: item.wind.deg, // degrees
-//     humidity: item.main.humidity, // percentage
-//     visibility: item.visibility / 1609.34, // meters to miles
-//     airPressure: item.main.pressure, // hPa to mb (they are equivalent)
-//   }));
-// };
-
 // Function to create forecast object for each day
-const createForecastObject = (data: any): ForecastObject[] => {
+const createForecastObjects = (data: any): ForecastObject[] => {
   const dailyData: { [key: string]: ForecastObject } = {};
 
   data.list.forEach((item: any) => {
@@ -141,20 +122,20 @@ const getWeatherIcon = (data: WeatherObject) => {
     return "Thunderstorm";
 
   if (data.weatherIcon === "09d" || data.weatherIcon === "09n") {
-    if ([302, 312].includes(data.weatherID)) return "HeavyRain";
-    if ([313, 314, 321, 521, 522, 531].includes(data.weatherID))
+    if ([302, 312].includes(data.weatherId)) return "HeavyRain";
+    if ([313, 314, 321, 521, 522, 531].includes(data.weatherId))
       return "Shower";
     return "LightRain";
   }
 
   if (data.weatherIcon === "10d" || data.weatherIcon === "10n") {
-    if ([500, 501].includes(data.weatherID)) return "LightRain";
+    if ([500, 501].includes(data.weatherId)) return "LightRain";
     return "HeavyRain";
   }
 
   if (data.weatherIcon === "13d" || data.weatherIcon === "13n") {
-    if (data.weatherID === 511) return "Haill";
-    if ([600, 601, 602].includes(data.weatherID)) return "Snow";
+    if (data.weatherId === 511) return "Haill";
+    if ([600, 601, 602].includes(data.weatherId)) return "Snow";
     return "Sleet";
   }
 
@@ -196,7 +177,12 @@ export const loadCurrentLocationWeather = async (position: any) => {
       createWeatherObject(weatherData),
       getWeatherIcon(createWeatherObject(weatherData))
     );
-    console.log(createForecastObject(forecastData));
+    console.log(createForecastObjects(forecastData));
+    console.log(
+      createForecastObjects(forecastData).map((forecast: any) =>
+        getWeatherIcon(forecast)
+      )
+    );
     state.weatherData = createWeatherObject(weatherData);
   } catch (err: any) {
     throw err;
