@@ -3,6 +3,8 @@ import { formatDate } from "./helper";
 
 export const state = {
   weatherData: {},
+  forecastData: [],
+  cities: {},
   search: {
     query: "",
     results: [],
@@ -11,6 +13,7 @@ export const state = {
 
 type ForecastObject = {
   city: string;
+  id: number;
   temp: number; // Celsius
   maxTemp: number; // Celsius
   minTemp: number; // Celsius
@@ -27,6 +30,7 @@ type ForecastObject = {
 
 type WeatherObject = {
   city: string;
+  id: number;
   tempC: number; // Celsius
   tempF: number; // Celsius
   weatherIcon: string;
@@ -43,6 +47,7 @@ type WeatherObject = {
 const createWeatherObject = (data: any): WeatherObject => {
   return {
     city: data.name,
+    id: data.id,
     tempC: data.main.temp - 273.15, // Converting Kelvin to Celsius
     tempF: ((data.main.temp - 273.15) * 9) / 5 + 32, // Converting Kelvin to Fahrenheit
     weatherIcon: data.weather[0].icon,
@@ -67,6 +72,7 @@ const createForecastObjects = (data: any): ForecastObject[] => {
     if (!dailyData[date]) {
       dailyData[date] = {
         city: data.city.name,
+        id: data.city.id,
         temp: ((item.main.temp - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
         maxTemp: ((item.main.temp_max - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
         minTemp: ((item.main.temp_min - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
@@ -99,10 +105,8 @@ const createForecastObjects = (data: any): ForecastObject[] => {
 
   const forecastArray = Object.values(dailyData).map((forecast) => {
     const entriesCount = data.list.filter(
-      (item: any) =>
-        new Date(item.dt * 1000).toLocaleDateString("en-US") === forecast.date
+      (item: any) => formatDate(item.dt) === forecast.date
     ).length;
-
     if (entriesCount > 0) {
       forecast.temp /= entriesCount;
       forecast.windStatus /= entriesCount;
@@ -173,16 +177,18 @@ export const loadCurrentLocationWeather = async (position: any) => {
       forecastRes.json(),
     ]);
 
-    console.log(
-      createWeatherObject(weatherData),
-      getWeatherIcon(createWeatherObject(weatherData))
-    );
-    console.log(createForecastObjects(forecastData));
-    console.log(
-      createForecastObjects(forecastData).map((forecast: any) =>
-        getWeatherIcon(forecast)
-      )
-    );
+    // console.log(weatherData);
+
+    // console.log(
+    //   createWeatherObject(weatherData),
+    //   getWeatherIcon(createWeatherObject(weatherData))
+    // );
+    // console.log(createForecastObjects(forecastData));
+    // console.log(
+    //   createForecastObjects(forecastData).map((forecast: any) =>
+    //     getWeatherIcon(forecast)
+    //   )
+    // );
     state.weatherData = createWeatherObject(weatherData);
   } catch (err: any) {
     throw err;
@@ -196,7 +202,7 @@ export const loadSearchResult = async () => {
         `https://api.openweathermap.org/data/2.5/weather?q=${"ilorin"}&appid=${API_KEY}`
       ),
       fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${"ilo"}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${"ilorin"}&appid=${API_KEY}`
       ),
     ]);
     const [weatherData, forecastData] = await Promise.all([
@@ -204,8 +210,20 @@ export const loadSearchResult = async () => {
       forecastRes.json(),
     ]);
 
-    console.log(weatherData, forecastData);
+    // console.log(weatherData, forecastData);
+    console.log(
+      createWeatherObject(weatherData),
+      getWeatherIcon(createWeatherObject(weatherData))
+    );
+    console.log(createForecastObjects(forecastData));
+    // console.log(
+    //   createForecastObjects(forecastData).map((forecast: any) =>
+    //     getWeatherIcon(forecast)
+    //   )
+    // );
   } catch (err: any) {
     throw err;
   }
 };
+
+loadSearchResult();
