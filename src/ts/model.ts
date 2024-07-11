@@ -1,10 +1,24 @@
 import { API_KEY } from "./config";
 import { formatDate } from "./helper";
 
-export const state = {
-  weatherData: {},
-  forecastData: [],
-  cities: {},
+export const state: {
+  weather: {
+    weatherData: Record<string, any>;
+    weatherIconName: string;
+  };
+  forecastData: Record<string, any>;
+  forecastIconNames: string[];
+  search: {
+    query: string;
+    results: any[];
+  };
+} = {
+  weather: {
+    weatherData: {},
+    weatherIconName: "",
+  },
+  forecastData: {},
+  forecastIconNames: [],
   search: {
     query: "",
     results: [],
@@ -47,18 +61,18 @@ type WeatherObject = {
 const createWeatherObject = (data: any): WeatherObject => {
   return {
     city: data.name,
-    id: data.id,
-    tempC: data.main.temp - 273.15, // Converting Kelvin to Celsius
-    tempF: ((data.main.temp - 273.15) * 9) / 5 + 32, // Converting Kelvin to Fahrenheit
+    tempC: Math.round(data.main.temp - 273.15), // Converting Kelvin to Celsius
+    tempF: Math.round(((data.main.temp - 273.15) * 9) / 5 + 32), // Converting Kelvin to Fahrenheit
     weatherIcon: data.weather[0].icon,
     weatherName: data.weather[0].main,
     weatherId: data.weather[0].id,
     date: formatDate(data.dt),
-    windStatus: data.wind.speed * 2.237, // Converting meters/second to mph
+    windStatus: Math.round(data.wind.speed * 2.237), // Converting meters/second to mph
     windDirection: data.wind.deg, // degrees
     humidity: data.main.humidity, // percentage
-    visibility: data.visibility / 1609.34, // Converting meters to miles
-    airPressure: data.main.pressure / 100, // Converting hPa to mb
+    visibility: (data.visibility / 1609.34).toFixed(1), // Converting meters to miles
+    airPressure: Math.round(data.main.pressure / 100), // Converting hPa to mb
+    ...(data.id && { id: data.id }),
   };
 };
 
@@ -121,7 +135,7 @@ const createForecastObjects = (data: any): ForecastObject[] => {
   return forecastArray;
 };
 
-const getWeatherIcon = (data: WeatherObject) => {
+const getWeatherIcon = (data: WeatherObject): string => {
   if (data.weatherIcon === "11d" || data.weatherIcon === "11n")
     return "Thunderstorm";
 
@@ -157,7 +171,7 @@ const getWeatherIcon = (data: WeatherObject) => {
   if (data.weatherIcon === "04d" || data.weatherIcon === "04n")
     return "HeavyCloud";
 
-  return;
+  return "";
 };
 
 export const loadCurrentLocationWeather = async (position: any) => {
@@ -177,19 +191,23 @@ export const loadCurrentLocationWeather = async (position: any) => {
       forecastRes.json(),
     ]);
 
-    // console.log(weatherData);
+    state.weather.weatherData = createWeatherObject(weatherData);
+    state.weather.weatherIconName = getWeatherIcon(
+      createWeatherObject(weatherData)
+    );
 
-    // console.log(
-    //   createWeatherObject(weatherData),
-    //   getWeatherIcon(createWeatherObject(weatherData))
-    // );
-    // console.log(createForecastObjects(forecastData));
-    // console.log(
-    //   createForecastObjects(forecastData).map((forecast: any) =>
-    //     getWeatherIcon(forecast)
-    //   )
-    // );
-    state.weatherData = createWeatherObject(weatherData);
+    state.forecastData = createForecastObjects(forecastData);
+    state.forecastIconNames = createForecastObjects(forecastData).map(
+      (forecast: any) => getWeatherIcon(forecast)
+    );
+
+    console.log(
+      createWeatherObject(weatherData),
+      getWeatherIcon(createWeatherObject(weatherData))
+    );
+    console.log(createForecastObjects(forecastData));
+
+    return [weatherData, forecastData];
   } catch (err: any) {
     throw err;
   }
@@ -209,18 +227,6 @@ export const loadSearchResult = async () => {
       weatherRes.json(),
       forecastRes.json(),
     ]);
-
-    // console.log(weatherData, forecastData);
-    console.log(
-      createWeatherObject(weatherData),
-      getWeatherIcon(createWeatherObject(weatherData))
-    );
-    console.log(createForecastObjects(forecastData));
-    // console.log(
-    //   createForecastObjects(forecastData).map((forecast: any) =>
-    //     getWeatherIcon(forecast)
-    //   )
-    // );
   } catch (err: any) {
     throw err;
   }

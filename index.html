@@ -66,52 +66,56 @@
         </button>
       </header>
 
-      <!-- Weather image  -->
-      <div
-        class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
-      >
-        <img
-          class="absolute object-cover left-0 top-0 object-center h-full w-full colorized"
-          src="/src/images/Cloud-background.png"
-          alt="Background image"
-        />
-        <img
-          class="relative z-10 max-p:w-[40%]"
-          src="src/images/Shower.png"
-          alt="Weather image"
-        />
-      </div>
+      <!-- Weather Display Start -->
+      <div class="weather h-full flex flex-col relative">
+        <!-- Weather image  -->
+        <!-- <div
+          class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
+        >
+          <img
+            class="absolute object-cover left-0 top-0 object-center h-full w-full colorized"
+            src="/src/images/Cloud-background.png"
+            alt="Background image"
+          />
+          <img
+            class="relative z-10 max-p:w-[40%]"
+            src="src/images/Shower.png"
+            alt="Weather image"
+          />
+        </div> -->
 
-      <!-- Weather Temp Value  -->
-      <div class="mx-auto px-16 max-tl:px-7">
-        <span class="text-[14.4rem]">15</span
-        ><span class="text-[4.8rem] text-secondary-text">°C</span>
-      </div>
-      <!-- Weather Name  -->
-      <p
-        class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
-      >
-        Shower
-      </p>
+        <!-- Weather Temp Value  -->
+        <!-- <div class="mx-auto px-16 max-tl:px-7">
+          <span class="text-[14.4rem]">15</span
+          ><span class="text-[4.8rem] text-secondary-text">°C</span>
+        </div> -->
+        <!-- Weather Name  -->
+        <!-- <p
+          class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
+        >
+          Shower
+        </p> -->
 
-      <!-- Weather Date  -->
-      <div
-        class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto"
-      >
-        <p>Today</p>
-        <span class="mx-4">•</span>
-        <p>Fri, 5 jun</p>
-      </div>
+        <!-- Weather Date  -->
+        <!-- <div
+          class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto"
+        >
+          <p>Today</p>
+          <span class="mx-4">•</span>
+          <p>Fri, 5 jun</p>
+        </div> -->
 
-      <!-- Weather Location  -->
-      <div
-        class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
-      >
-        <svg class="fill-secondary-text h-10 w-10">
-          <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
-        </svg>
-        <p class="city font-semibold">Helsinki</p>
+        <!-- Weather Location  -->
+        <!-- <div
+          class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
+        >
+          <svg class="fill-secondary-text h-10 w-10">
+            <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
+          </svg>
+          <p class="city font-semibold">Helsinki</p>
+        </div> -->
       </div>
+      <!-- Weather Display End -->
 
       <!-- Search input and Search result Start -->
       <aside
@@ -247,7 +251,7 @@
       <!-- Next Five Days End -->
 
       <!-- Today's Highlight Start -->
-      <div class="mt-32 font-bold max-p:mt-20">
+      <div class="mt-32 font-bold max-p:mt-20" id="highlight">
         <h2 class="text-[2.4rem] mb-10 max-p:text-center">Today's Highlight</h2>
         <div
           class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
@@ -266,7 +270,7 @@
               class="text-secondary-text mx-auto flex items-center justify-center"
             >
               <div class="btn btn--wind mr-4">
-                <svg class="fill-primary-text h-6 w-6">
+                <svg class="fill-primary-text h-6 w-6 -rotate-[45deg]">
                   <use xlink:href="./src/images/sprite.svg#icon-compass"></use>
                 </svg>
               </div>
