@@ -15,9 +15,7 @@ class WeatherView {
   render(data: any) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-
     this._data = data;
-
     const markup = this._generateMarkup();
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
@@ -39,7 +37,7 @@ class WeatherView {
       <div class="error">
         <div>
           <svg>
-            <use xlink:href="./src/images/sprite.svg#icon-alert-triangle"></use>
+            <use xlink:href="images/sprite.svg#icon-alert-triangle"></use>
           </svg>
         </div>
         <p>${message}</p>

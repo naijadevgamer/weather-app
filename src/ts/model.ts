@@ -210,7 +210,8 @@ export const loadCurrentLocationWeather = async (position: any) => {
     state.forecastIconNames = createForecastObjects(forecastData).map(
       (forecast: any) => getWeatherIcon(forecast)
     );
-  } catch (err: any) {
+  } catch (err) {
+    // console.error("Error in loadCurrentLocationWeather:", err);
     throw err;
   }
 };
