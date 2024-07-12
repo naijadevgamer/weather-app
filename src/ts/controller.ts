@@ -10,14 +10,12 @@ const controlCurrentLocationWeather = async function () {
           weatherView.renderSpinner();
           await model.loadCurrentLocationWeather(position);
           weatherView.render(model.state.weather);
+          console.log(model.state.weather);
         },
         () => {
           throw new Error("Could not get your position");
         }
       );
-
-    console.log(model.state.weather);
-    weatherView.render(model.state.weather);
   } catch (err) {
     console.error(err);
   }

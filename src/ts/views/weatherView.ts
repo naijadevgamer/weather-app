@@ -2,7 +2,7 @@
 
 class WeatherView {
   _data: any;
-  _parentElement = document.querySelector(".weather") as HTMLElement;
+  _parentElement = document.querySelector(".weather") as HTMLDivElement;
   _errorMessage = "No weather data available. Please try again later.";
 
   // MVC: Publisher
@@ -57,12 +57,12 @@ class WeatherView {
       >
         <img
           class="absolute object-cover left-0 top-0 object-center h-full w-full colorized"
-          src="/src/images/Cloud-background.png"
+          src="images/Cloud-background.png"
           alt="Background image"
         />
         <img
           class="relative z-10 max-p:w-[40%]"
-          src="src/images/${this._data.weatherIconName}.png"
+          src="images/${this._data.weatherIconName}.png"
           alt="Weather image"
         />
       </div>
@@ -93,7 +93,7 @@ class WeatherView {
         class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
       >
         <svg class="fill-secondary-text h-10 w-10">
-          <use xlink:href="./src/images/sprite.svg#icon-location-pin"></use>
+          <use xlink:href="images/sprite.svg#icon-location-pin"></use>
         </svg>
         <p class="city font-semibold">${this._data.weatherData.city}</p>
       </div>`;
