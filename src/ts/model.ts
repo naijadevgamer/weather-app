@@ -186,10 +186,20 @@ export const loadCurrentLocationWeather = async (position: any) => {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
       ),
     ]);
+
     const [weatherData, forecastData] = await Promise.all([
       weatherRes.json(),
       forecastRes.json(),
     ]);
+
+    [weatherRes, forecastRes].forEach((res, i) => {
+      if (!res.ok)
+        throw new Error(
+          `${[weatherData, forecastData][i].message} ${res.status} ${
+            res.statusText
+          }`
+        );
+    });
 
     state.weather.weatherData = createWeatherObject(weatherData);
     state.weather.weatherIconName = getWeatherIcon(
@@ -200,14 +210,6 @@ export const loadCurrentLocationWeather = async (position: any) => {
     state.forecastIconNames = createForecastObjects(forecastData).map(
       (forecast: any) => getWeatherIcon(forecast)
     );
-
-    console.log(
-      createWeatherObject(weatherData),
-      getWeatherIcon(createWeatherObject(weatherData))
-    );
-    console.log(createForecastObjects(forecastData));
-
-    return [weatherData, forecastData];
   } catch (err: any) {
     throw err;
   }
@@ -227,6 +229,15 @@ export const loadSearchResult = async () => {
       weatherRes.json(),
       forecastRes.json(),
     ]);
+
+    [weatherRes, forecastRes].forEach((res, i) => {
+      if (!res.ok)
+        throw new Error(
+          `${[weatherData, forecastData][i].message} ${res.status} ${
+            res.statusText
+          }`
+        );
+    });
   } catch (err: any) {
     throw err;
   }
