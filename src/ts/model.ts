@@ -12,6 +12,7 @@ export const state: {
     query: string;
     results: any[];
   };
+  celcius: boolean;
 } = {
   weather: {
     weatherData: {},
@@ -23,14 +24,15 @@ export const state: {
     query: "",
     results: [],
   },
+  celcius: true,
 };
 
 type ForecastObject = {
   city: string;
   id: number;
-  temp: number; // Celsius
-  maxTemp: number; // Celsius
-  minTemp: number; // Celsius
+  temp: number; // Kelvin
+  maxTemp: number;
+  minTemp: number;
   weatherIcon: string;
   weatherName: string;
   weatherId: number;
@@ -45,8 +47,7 @@ type ForecastObject = {
 type WeatherObject = {
   city: string;
   id: number;
-  tempC: number; // Celsius
-  tempF: number; // Celsius
+  temp: number; // kelvin
   weatherIcon: string;
   weatherName: string;
   weatherId: number;
@@ -61,8 +62,7 @@ type WeatherObject = {
 const createWeatherObject = (data: any): WeatherObject => {
   return {
     city: data.name,
-    tempC: Math.round(data.main.temp - 273.15), // Converting Kelvin to Celsius
-    tempF: Math.round(((data.main.temp - 273.15) * 9) / 5 + 32), // Converting Kelvin to Fahrenheit
+    temp: data.main.temp,
     weatherIcon: data.weather[0].icon,
     weatherName: data.weather[0].main,
     weatherId: data.weather[0].id,
@@ -87,9 +87,9 @@ const createForecastObjects = (data: any): ForecastObject[] => {
       dailyData[date] = {
         city: data.city.name,
         id: data.city.id,
-        temp: ((item.main.temp - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-        maxTemp: ((item.main.temp_max - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
-        minTemp: ((item.main.temp_min - 273.15) * 9) / 5 + 32, // Kelvin to Fahrenheit
+        temp: item.main.temp, // Kelvin
+        maxTemp: item.main.temp_max, // Kelvin
+        minTemp: item.main.temp_min, // Kelvin
         weatherIcon: item.weather[0].icon,
         weatherName: item.weather[0].main,
         weatherId: item.weather[0].id,
@@ -101,14 +101,14 @@ const createForecastObjects = (data: any): ForecastObject[] => {
         airPressure: item.main.pressure, // hPa to mb (they are equivalent)
       };
     } else {
-      dailyData[date].temp += ((item.main.temp - 273.15) * 9) / 5 + 32;
+      dailyData[date].temp += item.main.temp;
       dailyData[date].maxTemp = Math.max(
         dailyData[date].maxTemp,
-        ((item.main.temp_max - 273.15) * 9) / 5 + 32
+        item.main.temp_max
       );
       dailyData[date].minTemp = Math.min(
         dailyData[date].minTemp,
-        ((item.main.temp_min - 273.15) * 9) / 5 + 32
+        item.main.temp_min
       );
       dailyData[date].windStatus += item.wind.speed * 2.237;
       dailyData[date].humidity += item.main.humidity;
@@ -244,4 +244,4 @@ export const loadSearchResult = async () => {
   }
 };
 
-loadSearchResult();
+// loadSearchResult();

@@ -47,9 +47,14 @@ class WeatherView {
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
+  _convertTemp(temp: number): number {
+    return this._data.celcius
+      ? Math.round(temp - 273.15)
+      : Math.round(((temp - 273.15) * 9) / 5 + 32);
+  }
+
   _generateMarkup() {
-    return `
-      <!-- Weather image  -->
+    return `<!-- Weather image  -->
       <div
         class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
       >
@@ -60,21 +65,22 @@ class WeatherView {
         />
         <img
           class="relative z-10 max-p:w-[40%]"
-          src="images/${this._data.weatherIconName}.png"
+          src="images/${this._data.weather.weatherIconName}.png"
           alt="Weather image"
         />
       </div>
 
       <!-- Weather Temp Value  -->
       <div class="mx-auto px-16 max-tl:px-7">
-        <span class="text-[14.4rem]">${this._data.weatherData.tempC}</span
+        <span class="text-[14.4rem]"
+          >${this._convertTemp(this._data.weather.weatherData.temp)}</span
         ><span class="text-[4.8rem] text-secondary-text">°C</span>
       </div>
       <!-- Weather Name  -->
       <p
         class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
       >
-        ${this._data.weatherData.weatherName}
+        ${this._data.weather.weatherData.weatherName}
       </p>
 
       <!-- Weather Date  -->
@@ -83,7 +89,7 @@ class WeatherView {
       >
         <p>Today</p>
         <span class="mx-4">•</span>
-        <p>${this._data.weatherData.date}</p>
+        <p>${this._data.weather.weatherData.date}</p>
       </div>
 
       <!-- Weather Location  -->
@@ -93,7 +99,7 @@ class WeatherView {
         <svg class="fill-secondary-text h-10 w-10">
           <use xlink:href="images/sprite.svg#icon-location-pin"></use>
         </svg>
-        <p class="city font-semibold">${this._data.weatherData.city}</p>
+        <p class="city font-semibold">${this._data.weather.weatherData.city}</p>
       </div>`;
   }
 

@@ -9,7 +9,7 @@ const controlCurrentLocationWeather = function () {
         try {
           weatherView.renderSpinner();
           await model.loadCurrentLocationWeather(position);
-          weatherView.render(model.state.weather);
+          weatherView.render(model.state);
         } catch (err: any) {
           weatherView.renderError(err.message);
         }
@@ -18,6 +18,11 @@ const controlCurrentLocationWeather = function () {
         weatherView.renderError(
           "Could not get your position: " + error.message
         );
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
       }
     );
   } else
