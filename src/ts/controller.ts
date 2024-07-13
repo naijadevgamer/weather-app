@@ -1,5 +1,6 @@
 import "../styles/input.css";
 import * as model from "./model";
+import forecastView from "./views/forecastView";
 import weatherView from "./views/weatherView";
 
 const controlCurrentLocationWeather = function () {
@@ -8,8 +9,10 @@ const controlCurrentLocationWeather = function () {
       async (position: GeolocationPosition) => {
         try {
           weatherView.renderSpinner();
+          // forecastView.renderSpinner();
           await model.loadCurrentLocationWeather(position);
-          weatherView.render(model.state);
+          weatherView.weatherRender(model.state);
+          forecastView.renderForecast(model.state);
         } catch (err: any) {
           weatherView.renderError(err.message);
         }

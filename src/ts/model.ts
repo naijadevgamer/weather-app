@@ -2,28 +2,26 @@ import { API_KEY } from "./config";
 import { formatDate } from "./helper";
 
 export const state: {
-  weather: {
-    weatherData: Record<string, any>;
-    weatherIconName: string;
-  };
+  weatherData: Record<string, any>;
+  weatherIconName: string;
   forecastData: Record<string, any>;
   forecastIconNames: string[];
   search: {
     query: string;
     results: any[];
   };
+  currentHighlight: string;
   celcius: boolean;
 } = {
-  weather: {
-    weatherData: {},
-    weatherIconName: "",
-  },
+  weatherData: {},
+  weatherIconName: "",
   forecastData: {},
   forecastIconNames: [],
   search: {
     query: "",
     results: [],
   },
+  currentHighlight: "today",
   celcius: true,
 };
 
@@ -201,10 +199,8 @@ export const loadCurrentLocationWeather = async (position: any) => {
         );
     });
 
-    state.weather.weatherData = createWeatherObject(weatherData);
-    state.weather.weatherIconName = getWeatherIcon(
-      createWeatherObject(weatherData)
-    );
+    state.weatherData = createWeatherObject(weatherData);
+    state.weatherIconName = getWeatherIcon(createWeatherObject(weatherData));
 
     state.forecastData = createForecastObjects(forecastData);
     state.forecastIconNames = createForecastObjects(forecastData).map(

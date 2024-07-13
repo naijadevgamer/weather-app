@@ -1,18 +1,18 @@
 // import View from "./view";
 
-class WeatherView {
+class ForecastView {
   _data: any;
-  _parentElement = document.querySelector("#weather") as HTMLDivElement;
-  _errorMessage = "No weather data available. Please try again later.";
+  _parentElement = document.querySelector("#forecast") as HTMLDivElement;
+  _errorMessage = "No weather forecast data available. Please try again later.";
 
   // MVC: Publisher
-  addHandlerWeatherRender(handler: any) {
-    ["load", "hashchange"].forEach((event) =>
-      window.addEventListener(event, handler)
-    );
-  }
+  // addHandlerRender(handler) {
+  //   ["load", "hashchange"].forEach((ev) =>
+  //     window.addEventListener(ev, handler)
+  //   );
+  // }
 
-  weatherRender(data: any) {
+  renderForecast(data: any) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
     this._data = data;
@@ -27,7 +27,7 @@ class WeatherView {
 
   renderSpinner() {
     const markup = `
-    <div class="loader mx-auto my-60"></div>`;
+    <div class="loader mx-auto my-auto"></div>`;
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
@@ -54,55 +54,24 @@ class WeatherView {
   }
 
   _generateMarkup() {
-    return `<!-- Weather image  -->
-      <div
-        class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
-      >
-        <img
-          class="absolute object-cover left-0 top-0 object-center h-full w-full colorized"
-          src="images/Cloud-background.png"
-          alt="Background image"
-        />
-        <img
-          class="relative z-10 max-p:w-[40%]"
-          src="images/${this._data.weatherIconName}.png"
-          alt="Weather image"
-        />
-      </div>
-
-      <!-- Weather Temp Value  -->
-      <div class="mx-auto px-16 max-tl:px-7">
-        <span class="text-[14.4rem]"
-          >${this._convertTemp(this._data.weatherData.temp)}</span
-        ><span class="text-[4.8rem] text-secondary-text">${
+    return `${this._data.forecastData
+      .map(
+        (forecast: any, i: number) => `<div class="day">
+          <p class="day__name">${forecast.date}</p>
+          <img src="images/${
+            this._data.forecastIconNames[i]
+          }.png" alt="" class="day__img" />
+          <div class="day__temp">
+            <p class="max">${this._convertTemp(forecast.maxTemp)}${
           this._data.celcius ? "°C" : "°F"
-        }</span>
-      </div>
-      <!-- Weather Name  -->
-      <p
-        class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
-      >
-        ${this._data.weatherData.weatherName}
-      </p>
-
-      <!-- Weather Date  -->
-      <div
-        class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto"
-      >
-        <p>Today</p>
-        <span class="mx-4">•</span>
-        <p>${this._data.weatherData.date}</p>
-      </div>
-
-      <!-- Weather Location  -->
-      <div
-        class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
-      >
-        <svg class="fill-secondary-text h-10 w-10">
-          <use xlink:href="images/sprite.svg#icon-location-pin"></use>
-        </svg>
-        <p class="city font-semibold">${this._data.weatherData.city}</p>
-      </div>`;
+        }</p>
+            <p class="min text-secondary-text">${this._convertTemp(
+              forecast.minTemp
+            )}${this._data.celcius ? "°C" : "°F"}</p>
+          </div>
+        </div>`
+      )
+      .join("")}`;
   }
 
   // _generateMarkup() {
@@ -196,4 +165,4 @@ class WeatherView {
   // }
 }
 
-export default new WeatherView();
+export default new ForecastView();
