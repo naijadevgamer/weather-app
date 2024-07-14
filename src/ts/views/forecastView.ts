@@ -13,8 +13,6 @@ class ForecastView {
   // }
 
   renderForecast(data: any) {
-    if (!data || (Array.isArray(data) && data.length === 0))
-      return this.renderError();
     this._data = data;
     const markup = this._generateMarkup();
     this._clear();
@@ -25,27 +23,89 @@ class ForecastView {
     this._parentElement.innerHTML = "";
   }
 
-  renderSpinner() {
-    const markup = `
-    <div class="loader mx-auto my-auto"></div>`;
+  renderSkeleton() {
+    const markup = `<div role="status" class="day--l">
+        <p class="day__name--l"></p>
+        <div class="day__img--l">
+          <svg class="w-10 h-10 text-gray-200 dark:text-gray-600 fill-current">
+            <use xlink:href="images/sprite.svg#icon-skeleton-img"></use>
+          </svg>
+        </div>
+        <div class="day__temp">
+          <div class="day__minmax"></div>
+          <div class="day__minmax"></div>
+        </div>
+      </div>
+
+      <div role="status" class="day--l">
+        <p class="day__name--l"></p>
+        <div class="day__img--l">
+          <svg class="w-10 h-10 text-gray-200 dark:text-gray-600 fill-current">
+            <use xlink:href="images/sprite.svg#icon-skeleton-img"></use>
+          </svg>
+        </div>
+        <div class="day__temp">
+          <div class="day__minmax"></div>
+          <div class="day__minmax"></div>
+        </div>
+      </div>
+
+      <div role="status" class="day--l">
+        <p class="day__name--l"></p>
+        <div class="day__img--l">
+          <svg class="w-10 h-10 text-gray-200 dark:text-gray-600 fill-current">
+            <use xlink:href="images/sprite.svg#icon-skeleton-img"></use>
+          </svg>
+        </div>
+        <div class="day__temp">
+          <div class="day__minmax"></div>
+          <div class="day__minmax"></div>
+        </div>
+      </div>
+
+      <div role="status" class="day--l">
+        <p class="day__name--l"></p>
+        <div class="day__img--l">
+          <svg class="w-10 h-10 text-gray-200 dark:text-gray-600 fill-current">
+            <use xlink:href="images/sprite.svg#icon-skeleton-img"></use>
+          </svg>
+        </div>
+        <div class="day__temp">
+          <div class="day__minmax"></div>
+          <div class="day__minmax"></div>
+        </div>
+      </div>
+
+      <div role="status" class="day--l">
+        <p class="day__name--l"></p>
+        <div class="day__img--l">
+          <svg class="w-10 h-10 text-gray-200 dark:text-gray-600 fill-current">
+            <use xlink:href="images/sprite.svg#icon-skeleton-img"></use>
+          </svg>
+        </div>
+        <div class="day__temp">
+          <div class="day__minmax"></div>
+          <div class="day__minmax"></div>
+        </div>
+      </div>`;
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
-  renderError(message: string = this._errorMessage) {
-    const markup = `
-      <div class="error">
-        <div>
-          <svg>
-            <use xlink:href="images/sprite.svg#icon-alert-triangle"></use>
-          </svg>
-        </div>
-        <p>${message}</p>
-      </div>
-    `;
-    this._clear();
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  }
+  // renderError(message: string = this._errorMessage) {
+  //   const markup = `
+  //     <div class="error">
+  //       <div>
+  //         <svg>
+  //           <use xlink:href="images/sprite.svg#icon-alert-triangle"></use>
+  //         </svg>
+  //       </div>
+  //       <p>${message}</p>
+  //     </div>
+  //   `;
+  //   this._clear();
+  //   this._parentElement.insertAdjacentHTML("afterbegin", markup);
+  // }
 
   _convertTemp(temp: number): number {
     return this._data.celcius
@@ -54,24 +114,58 @@ class ForecastView {
   }
 
   _generateMarkup() {
-    return `${this._data.forecastData
-      .map(
-        (forecast: any, i: number) => `<div class="day">
-          <p class="day__name">${forecast.date}</p>
-          <img src="images/${
-            this._data.forecastIconNames[i]
-          }.png" alt="" class="day__img" />
-          <div class="day__temp">
-            <p class="max">${this._convertTemp(forecast.maxTemp)}${
-          this._data.celcius ? "°C" : "°F"
-        }</p>
-            <p class="min text-secondary-text">${this._convertTemp(
-              forecast.minTemp
-            )}${this._data.celcius ? "°C" : "°F"}</p>
-          </div>
-        </div>`
-      )
-      .join("")}`;
+    return `${
+      this._data.forecastData.length === 6
+        ? this._data.forecastData
+            .filter((_: any, i: number) => i > 0)
+            .map(
+              (forecast: any, i: number) => `<div class="day">
+                <p class="day__name">${forecast.date}</p>
+                <img
+                  src="images/${this._data.forecastIconNames[i]}.png"
+                  alt=""
+                  class="day__img"
+                />
+                <div class="day__temp">
+                  <p class="max">
+                    ${this._convertTemp(forecast.maxTemp)}${
+                this._data.celcius ? "°C" : "°F"
+              }
+                  </p>
+                  <p class="min text-secondary-text">
+                    ${this._convertTemp(forecast.minTemp)}${
+                this._data.celcius ? "°C" : "°F"
+              }
+                  </p>
+                </div>
+              </div>`
+            )
+            .join("")
+        : this._data.forecastData
+            .map(
+              (forecast: any, i: number) => `<div class="day">
+                <p class="day__name">${forecast.date}</p>
+                <img
+                  src="images/${this._data.forecastIconNames[i]}.png"
+                  alt=""
+                  class="day__img"
+                />
+                <div class="day__temp">
+                  <p class="max">
+                    ${this._convertTemp(forecast.maxTemp)}${
+                this._data.celcius ? "°C" : "°F"
+              }
+                  </p>
+                  <p class="min text-secondary-text">
+                    ${this._convertTemp(forecast.minTemp)}${
+                this._data.celcius ? "°C" : "°F"
+              }
+                  </p>
+                </div>
+              </div>`
+            )
+            .join("")
+    }`;
   }
 
   // _generateMarkup() {

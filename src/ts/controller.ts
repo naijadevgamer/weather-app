@@ -5,10 +5,13 @@ import weatherView from "./views/weatherView";
 
 const controlCurrentLocationWeather = function () {
   if (navigator.geolocation) {
+    weatherView.renderSpinner();
+    forecastView.renderSkeleton();
     navigator.geolocation.getCurrentPosition(
       async (position: GeolocationPosition) => {
         try {
           weatherView.renderSpinner();
+          forecastView.renderSkeleton();
           // forecastView.renderSpinner();
           await model.loadCurrentLocationWeather(position);
           weatherView.weatherRender(model.state);

@@ -46,6 +46,24 @@ body::-webkit-scrollbar-thumb:active {
   @apply flex justify-between text-[1.6rem];
 }
 
+/* h1 {
+  color: #26294b;
+} */
+
+.day--l {
+  @apply bg-secondary-bg p-6 flex flex-col text-center border border-[#26294b] rounded shadow animate-pulse dark:border-[#0c0d18];
+}
+.day__name--l {
+  @apply h-2.5 bg-[#26294b] rounded-full dark:bg-[#0c0d18] w-full mx-auto mb-6 mt-2;
+}
+
+.day__img--l {
+  @apply mt-1 self-center flex items-center justify-center h-24 mb-auto w-full bg-[#26294b] rounded dark:bg-[#0c0d18];
+}
+
+.day__minmax {
+  @apply h-2.5 bg-[#26294b] mb-2 rounded-full dark:bg-[#0c0d18] w-12;
+}
 /* Search result */
 .result {
   @apply h-24 px-3 w-full flex justify-between items-center border border-transparent hover:border-secondary-text cursor-pointer duration-150;
