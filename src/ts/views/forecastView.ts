@@ -19,6 +19,15 @@ class ForecastView {
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
+  addHandlerClick(handler: any) {
+    this._parentElement.addEventListener("click", function (e: Event) {
+      const el = e.target as HTMLDivElement;
+      const btn = el.closest(".day") as HTMLDivElement;
+      if (!btn) return;
+      handler(btn.dataset.date);
+    });
+  }
+
   _clear() {
     this._parentElement.innerHTML = "";
   }
@@ -99,12 +108,13 @@ class ForecastView {
   }
 
   _generateMarkup() {
-    return `${
-      this._data.forecastData.length === 6
-        ? this._data.forecastData
-            .filter((_: any, i: number) => i > 0)
-            .map(
-              (forecast: any, i: number) => `<div class="day">
+    return this._data.forecastData.length === 6
+      ? this._data.forecastData
+          .filter((_: any, i: number) => i > 0)
+          .map(
+            (forecast: any, i: number) => `<div class="day" data-date="${
+              forecast.date
+            }">
                 <p class="day__name">${forecast.date}</p>
                 <img
                   src="images/${this._data.forecastIconNames[i]}.png"
@@ -114,21 +124,21 @@ class ForecastView {
                 <div class="day__temp">
                   <p class="max">
                     ${this._convertTemp(forecast.maxTemp)}${
-                this._data.celcius ? "°C" : "°F"
-              }
+              this._data.celcius ? "°C" : "°F"
+            }
                   </p>
                   <p class="min text-secondary-text">
                     ${this._convertTemp(forecast.minTemp)}${
-                this._data.celcius ? "°C" : "°F"
-              }
+              this._data.celcius ? "°C" : "°F"
+            }
                   </p>
                 </div>
               </div>`
-            )
-            .join("")
-        : this._data.forecastData
-            .map(
-              (forecast: any, i: number) => `<div class="day">
+          )
+          .join("")
+      : this._data.forecastData
+          .map(
+            (forecast: any, i: number) => `<div class="day">
                 <p class="day__name">${forecast.date}</p>
                 <img
                   src="images/${this._data.forecastIconNames[i]}.png"
@@ -138,19 +148,18 @@ class ForecastView {
                 <div class="day__temp">
                   <p class="max">
                     ${this._convertTemp(forecast.maxTemp)}${
-                this._data.celcius ? "°C" : "°F"
-              }
+              this._data.celcius ? "°C" : "°F"
+            }
                   </p>
                   <p class="min text-secondary-text">
                     ${this._convertTemp(forecast.minTemp)}${
-                this._data.celcius ? "°C" : "°F"
-              }
+              this._data.celcius ? "°C" : "°F"
+            }
                   </p>
                 </div>
               </div>`
-            )
-            .join("")
-    }`;
+          )
+          .join("");
   }
 
   // _generateMarkup() {

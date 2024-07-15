@@ -37,7 +37,7 @@ body::-webkit-scrollbar-thumb:active {
 
 /* Days component */
 .day {
-  @apply bg-secondary-bg p-6 flex flex-col text-center;
+  @apply bg-secondary-bg p-6 flex flex-col text-center cursor-pointer;
 }
 .day__img {
   @apply h-[6.2rem] mt-1 mb-auto self-center;

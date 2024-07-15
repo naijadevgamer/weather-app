@@ -4,7 +4,7 @@ import forecastView from "./views/forecastView";
 import weatherView from "./views/weatherView";
 import highlightView from "./views/highlightView";
 
-const controlCurrentLocationWeather = function () {
+const controlCurrentLocationWeather = () => {
   if (navigator.geolocation) {
     weatherView.renderSpinner();
     forecastView.renderSkeleton();
@@ -18,7 +18,7 @@ const controlCurrentLocationWeather = function () {
           weatherView.renderWeather(model.state);
           forecastView.renderForecast(model.state);
           highlightView.renderHighlight(model.state);
-          console.log(model.state.weatherData);
+          console.log(model.state.weatherData, model.state.forecastData);
         } catch (err: any) {
           weatherView.renderError(err.message);
         }
@@ -40,9 +40,14 @@ const controlCurrentLocationWeather = function () {
     );
 };
 
-controlCurrentLocationWeather();
+const controlForecastClick = (date: string) => {
+  highlightView.renderUpdate(model.state.forecastData, date);
+};
 
-const controlSearchResult = async function () {
+controlCurrentLocationWeather();
+forecastView.addHandlerClick(controlForecastClick);
+
+const controlSearchResult = async () => {
   try {
   } catch (err) {
     console.error(err);
