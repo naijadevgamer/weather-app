@@ -2,6 +2,7 @@ import "../styles/input.css";
 import * as model from "./model";
 import forecastView from "./views/forecastView";
 import weatherView from "./views/weatherView";
+import highlightView from "./views/highlightView";
 
 const controlCurrentLocationWeather = function () {
   if (navigator.geolocation) {
@@ -11,11 +12,13 @@ const controlCurrentLocationWeather = function () {
       async (position: GeolocationPosition) => {
         try {
           weatherView.renderSpinner();
+          // highlightView.renderSpinner();
           forecastView.renderSkeleton();
-          // forecastView.renderSpinner();
           await model.loadCurrentLocationWeather(position);
-          weatherView.weatherRender(model.state);
+          weatherView.renderWeather(model.state);
           forecastView.renderForecast(model.state);
+          highlightView.renderHighlight(model.state);
+          console.log(model.state.weatherData);
         } catch (err: any) {
           weatherView.renderError(err.message);
         }

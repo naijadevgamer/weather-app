@@ -92,21 +92,6 @@ class ForecastView {
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
-  // renderError(message: string = this._errorMessage) {
-  //   const markup = `
-  //     <div class="error">
-  //       <div>
-  //         <svg>
-  //           <use xlink:href="images/sprite.svg#icon-alert-triangle"></use>
-  //         </svg>
-  //       </div>
-  //       <p>${message}</p>
-  //     </div>
-  //   `;
-  //   this._clear();
-  //   this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  // }
-
   _convertTemp(temp: number): number {
     return this._data.celcius
       ? Math.round(temp - 273.15)

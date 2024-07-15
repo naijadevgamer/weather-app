@@ -12,7 +12,7 @@ class WeatherView {
     );
   }
 
-  weatherRender(data: any) {
+  renderWeather(data: any) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
     this._data = data;
