@@ -118,11 +118,29 @@ class HighlightView {
   //       <p class="city font-semibold">${this._data.weatherData.city}</p>
   //     </div>`;
   // }
+  _days(): string[] {
+    return [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednessday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+  }
+
   _generateForecastPreview(forecast: any) {
     return `<h2 class="text-[2.4rem] mb-10 max-p:text-center">
-        ${new Date(
-          `${forecast.date} ${new Date().getFullYear()}`
-        ).getDay()}'s Highlight
+        ${
+          this._data.tomorrow
+            ? "Tomorrow"
+            : this._days()[
+                new Date(
+                  `${forecast.date} ${new Date().getFullYear()}`
+                ).getDay()
+              ]
+        }'s Highlight
       </h2>
       <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
