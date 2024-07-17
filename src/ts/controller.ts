@@ -41,7 +41,7 @@ const controlCurrentLocationWeather = () => {
 };
 
 const controlForecastClick = (date: string) => {
-  highlightView.renderUpdate(model.state.forecastData, date);
+  highlightView.renderUpdate(model.state, date);
 };
 
 controlCurrentLocationWeather();

@@ -30,6 +30,9 @@ class HighlightView {
   }
 
   _generateForecastMarkup(date: string) {
+    // this._data.forecastData.forEach((forecast: any, i: number) => {
+    //   if (i === 0) this._data.tomorrow = false;
+    // });
     return this._data.forecastData.length === 6
       ? this._data.forecastData
           .filter((_: any, i: number) => i > 0)
@@ -115,10 +118,11 @@ class HighlightView {
   //       <p class="city font-semibold">${this._data.weatherData.city}</p>
   //     </div>`;
   // }
-
   _generateForecastPreview(forecast: any) {
     return `<h2 class="text-[2.4rem] mb-10 max-p:text-center">
-        ${forecast.date}'s Highlight
+        ${new Date(
+          `${forecast.date} ${new Date().getFullYear()}`
+        ).getDay()}'s Highlight
       </h2>
       <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
@@ -129,9 +133,9 @@ class HighlightView {
 
           <!-- Wind value  -->
           <p class="text-[6.4rem]">
-            <span>${
+            <span>${Math.round(
               forecast.windStatus
-            }</span><span class="text-[3.6rem]">mph</span>
+            )}</span><span class="text-[3.6rem]">mph</span>
           </p>
 
           <!-- Wind visual  -->
@@ -157,9 +161,9 @@ class HighlightView {
 
           <!-- Humidity value  -->
           <p class="text-[6.4rem]">
-            <span>${
+            <span>${Math.round(
               forecast.humidity
-            }</span><span class="text-[3.6rem]">%</span>
+            )}</span><span class="text-[3.6rem]">%</span>
           </p>
 
           <!-- Humidity range bar  -->
@@ -174,9 +178,9 @@ class HighlightView {
             <div
               class="w-full h-[8px] rounded-3xl overflow-hidden bg-primary-text"
             >
-              <p class=" bg-range-bg h-full" style="width: ${
+              <p class=" bg-range-bg h-full" style="width: ${Math.round(
                 forecast.humidity
-              }%;"></p>
+              )}%;"></p>
             </div>
             <div class="flex justify-end px-1">%</div>
           </div>
@@ -188,9 +192,9 @@ class HighlightView {
 
           <!-- Visibility value  -->
           <p class="text-[6.4rem]">
-            <span>${
-              forecast.visibility
-            }</span><span class="text-[3.6rem]"> miles</span>
+            <span>${forecast.visibility.toFixed(
+              1
+            )}</span><span class="text-[3.6rem]"> miles</span>
           </p>
         </div>
 
@@ -200,9 +204,9 @@ class HighlightView {
 
           <!-- Air pressure value  -->
           <p class="text-[6.4rem]">
-            <span>${
+            <span>${Math.round(
               forecast.airPressure
-            }</span><span class="text-[3.6rem]"> mb</span>
+            )}</span><span class="text-[3.6rem]"> mb</span>
           </p>
         </div>
       </div>`;

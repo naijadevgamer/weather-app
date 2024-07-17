@@ -24,6 +24,7 @@ class ForecastView {
       const el = e.target as HTMLDivElement;
       const btn = el.closest(".day") as HTMLDivElement;
       if (!btn) return;
+      console.log(btn.dataset.date);
       handler(btn.dataset.date);
     });
   }

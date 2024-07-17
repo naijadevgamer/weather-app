@@ -10,7 +10,7 @@ export const state: {
     query: string;
     results: any[];
   };
-  currentHighlight: string;
+  tomorrow: boolean;
   celcius: boolean;
 } = {
   weatherData: {},
@@ -21,7 +21,7 @@ export const state: {
     query: "",
     results: [],
   },
-  currentHighlight: "today",
+  tomorrow: false,
   celcius: true,
 };
 
@@ -69,7 +69,7 @@ const createWeatherObject = (data: any): WeatherObject => {
     windDirection: data.wind.deg, // degrees
     humidity: data.main.humidity, // percentage
     visibility: (data.visibility / 1609.34).toFixed(1), // Converting meters to miles
-    airPressure: Math.round(data.main.pressure / 100), // Converting hPa to mb
+    airPressure: Math.round(data.main.pressure),
     ...(data.id && { id: data.id }),
   };
 };
