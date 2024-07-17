@@ -45,81 +45,16 @@ class HighlightView {
           .join("");
   }
 
-  // renderSpinner() {
-  //   const markup = `
-  //   <div class="loader mx-auto my-60"></div>`;
-  //   this._clear();
-  //   this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  // }
+  _getDay(forecast: any) {
+    let todayIndex = new Date(
+      `${this._data.weatherData.date} ${new Date().getFullYear()}`
+    ).getDay();
 
-  // renderError(message: string = this._errorMessage) {
-  //   const markup = `
-  //     <div class="error">
-  //       <div>
-  //         <svg>
-  //           <use xlink:href="images/sprite.svg#icon-alert-triangle"></use>
-  //         </svg>
-  //       </div>
-  //       <p>${message}</p>
-  //     </div>
-  //   `;
-  //   this._clear();
-  //   this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  // }
+    const forecastDayIndex = new Date(
+      `${forecast.date} ${new Date().getFullYear()}`
+    ).getDay();
 
-  // _generateMarkup() {
-  //   return `<!-- Weather image  -->
-  //     <div
-  //       class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10"
-  //     >
-  //       <img
-  //         class="absolute object-cover left-0 top-0 object-center h-full w-full colorized"
-  //         src="images/Cloud-background.png"
-  //         alt="Background image"
-  //       />
-  //       <img
-  //         class="relative z-10 max-p:w-[40%]"
-  //         src="images/${this._data.weatherIconName}.png"
-  //         alt="Weather image"
-  //       />
-  //     </div>
-
-  //     <!-- Weather Temp Value  -->
-  //     <div class="mx-auto px-16 max-tl:px-7">
-  //       <span class="text-[14.4rem]"
-  //         >${this._convertTemp(this._data.weatherData.temp)}</span
-  //       ><span class="text-[4.8rem] text-secondary-text">${
-  //         this._data.celcius ? "°C" : "°F"
-  //       }</span>
-  //     </div>
-  //     <!-- Weather Name  -->
-  //     <p
-  //       class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10"
-  //     >
-  //       ${this._data.weatherData.weatherName}
-  //     </p>
-
-  //     <!-- Weather Date  -->
-  //     <div
-  //       class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto"
-  //     >
-  //       <p>Today</p>
-  //       <span class="mx-4">•</span>
-  //       <p>${this._data.weatherData.date}</p>
-  //     </div>
-
-  //     <!-- Weather Location  -->
-  //     <div
-  //       class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7"
-  //     >
-  //       <svg class="fill-secondary-text h-10 w-10">
-  //         <use xlink:href="images/sprite.svg#icon-location-pin"></use>
-  //       </svg>
-  //       <p class="city font-semibold">${this._data.weatherData.city}</p>
-  //     </div>`;
-  // }
-  _days(): string[] {
-    return [
+    const days = [
       "Sunday",
       "Monday",
       "Tuesday",
@@ -128,19 +63,15 @@ class HighlightView {
       "Friday",
       "Saturday",
     ];
+    todayIndex = todayIndex === 6 ? 0 : todayIndex;
+    return days[todayIndex + 1] === days[forecastDayIndex]
+      ? "Tomorrow"
+      : days[forecastDayIndex];
   }
 
   _generateForecastPreview(forecast: any) {
     return `<h2 class="text-[2.4rem] mb-10 max-p:text-center">
-        ${
-          this._data.tomorrow
-            ? "Tomorrow"
-            : this._days()[
-                new Date(
-                  `${forecast.date} ${new Date().getFullYear()}`
-                ).getDay()
-              ]
-        }'s Highlight
+        ${this._getDay(forecast)}'s Highlight
       </h2>
       <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
@@ -198,7 +129,7 @@ class HighlightView {
             >
               <p class=" bg-range-bg h-full" style="width: ${Math.round(
                 forecast.humidity
-              )}%;"></p>
+              )}%; transition: all 10s ease 3s"></p>
             </div>
             <div class="flex justify-end px-1">%</div>
           </div>

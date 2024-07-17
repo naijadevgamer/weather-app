@@ -108,6 +108,30 @@ class ForecastView {
       : Math.round(((temp - 273.15) * 9) / 5 + 32);
   }
 
+  _getDay(forecast: any) {
+    let todayIndex = new Date(
+      `${this._data.weatherData.date} ${new Date().getFullYear()}`
+    ).getDay();
+
+    const forecastDayIndex = new Date(
+      `${forecast.date} ${new Date().getFullYear()}`
+    ).getDay();
+
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednessday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    todayIndex = todayIndex === 6 ? 0 : todayIndex;
+    return days[todayIndex + 1] === days[forecastDayIndex]
+      ? "Tomorrow"
+      : forecast.date;
+  }
+
   _generateMarkup() {
     return this._data.forecastData.length === 6
       ? this._data.forecastData
@@ -116,7 +140,7 @@ class ForecastView {
             (forecast: any, i: number) => `<div class="day" data-date="${
               forecast.date
             }">
-                <p class="day__name">${forecast.date}</p>
+                <p class="day__name">${this._getDay(forecast)}</p>
                 <img
                   src="images/${this._data.forecastIconNames[i]}.png"
                   alt=""
