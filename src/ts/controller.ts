@@ -44,8 +44,14 @@ const controlForecastClick = (date: string) => {
   highlightView.renderUpdate(model.state, date);
 };
 
+const controlCurrentWeatherClick = () => {
+  if (model.state.weatherData.humidity)
+    highlightView.renderHighlight(model.state);
+};
+
 controlCurrentLocationWeather();
 forecastView.addHandlerClick(controlForecastClick);
+weatherView.addHandlerClick(controlCurrentWeatherClick);
 
 const controlSearchResult = async () => {
   try {

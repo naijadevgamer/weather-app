@@ -62,7 +62,9 @@ const createWeatherObject = (data: any): WeatherObject => {
     city: data.name,
     temp: data.main.temp,
     weatherIcon: data.weather[0].icon,
-    weatherName: data.weather[0].main,
+    weatherName:
+      data.weather[0].description[0].toUpperCase() +
+      data.weather[0].description.slice(1),
     weatherId: data.weather[0].id,
     date: formatDate(data.dt),
     windStatus: Math.round(data.wind.speed * 2.237), // Converting meters/second to mph
@@ -99,6 +101,9 @@ const createForecastObjects = (data: any): ForecastObject[] => {
         airPressure: item.main.pressure, // hPa to mb (they are equivalent)
       };
     } else {
+      // Get icon at time closest to mid-day
+      if (new Date(item.dt * 1000).getHours() === 13)
+        dailyData[date].weatherIcon = item.weather[0].icon;
       dailyData[date].temp += item.main.temp;
       dailyData[date].maxTemp = Math.max(
         dailyData[date].maxTemp,

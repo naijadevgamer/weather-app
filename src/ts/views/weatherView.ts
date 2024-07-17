@@ -12,6 +12,13 @@ class WeatherView {
     );
   }
 
+  addHandlerClick(handler: any) {
+    this._parentElement.addEventListener("click", (e: Event) => {
+      const el = e.target as HTMLDivElement;
+      handler();
+    });
+  }
+
   renderWeather(data: any) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
