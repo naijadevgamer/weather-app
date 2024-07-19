@@ -101,7 +101,6 @@ body::-webkit-scrollbar-thumb:active {
 }
 
 /* Loading animation  */
-/* HTML: <div class="loader"></div> */
 .loader {
   width: 100px;
   --b: 8px;

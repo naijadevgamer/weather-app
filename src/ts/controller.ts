@@ -4,6 +4,7 @@ import forecastView from "./views/forecastView";
 import weatherView from "./views/weatherView";
 import highlightView from "./views/highlightView";
 import tempUnitChangeView from "./views/tempUnitChangeView";
+import searchView from "./views/searchView";
 
 const controlCurrentLocationWeather = () => {
   if (navigator.geolocation) {
@@ -55,22 +56,21 @@ const controlTempUnitChange = (unit: string) => {
   weatherView.renderWeather(model.state);
   forecastView.renderForecast(model.state);
 };
+const controlSearchResult = async () => {
+  try {
+    weatherView.renderSpinner();
+    forecastView.renderSkeleton();
+    await model.loadSearchResult(searchView.getQuery());
+    weatherView.renderWeather(model.state);
+    forecastView.renderForecast(model.state);
+    highlightView.renderHighlight(model.state);
+  } catch (err: any) {
+    weatherView.renderError(err.message);
+  }
+};
 
 controlCurrentLocationWeather();
 forecastView.addHandlerClick(controlForecastClick);
 weatherView.addHandlerClick(controlCurrentWeatherClick);
 tempUnitChangeView.addHandlerClick(controlTempUnitChange);
-
-const controlSearchResult = async () => {
-  try {
-  } catch (err) {
-    console.error(err);
-  }
-};
-
-const controlForecast = async function () {
-  try {
-  } catch (err) {
-    console.error(err);
-  }
-};
+searchView.addHandlerSubmit(controlSearchResult);

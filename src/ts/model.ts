@@ -6,20 +6,14 @@ export const state: {
   weatherIconName: string;
   forecastData: Record<string, any>;
   forecastIconNames: string[];
-  search: {
-    query: string;
-    results: any[];
-  };
+  query: string;
   celcius: boolean;
 } = {
   weatherData: {},
   weatherIconName: "",
   forecastData: {},
   forecastIconNames: [],
-  search: {
-    query: "",
-    results: [],
-  },
+  query: "",
   celcius: true,
 };
 
@@ -214,14 +208,15 @@ export const loadCurrentLocationWeather = async (position: any) => {
   }
 };
 
-export const loadSearchResult = async () => {
+export const loadSearchResult = async (query: string) => {
   try {
+    state.query = query;
     const [weatherRes, forecastRes] = await Promise.all([
       fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${"ilorin"}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${API_KEY}`
       ),
       fetch(
-        `https://api.openweathermap.org/data/2.5/forecast?q=${"ilorin"}&appid=${API_KEY}`
+        `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${API_KEY}`
       ),
     ]);
     const [weatherData, forecastData] = await Promise.all([
@@ -237,6 +232,14 @@ export const loadSearchResult = async () => {
           }`
         );
     });
+
+    state.weatherData = createWeatherObject(weatherData);
+    state.weatherIconName = getWeatherIcon(createWeatherObject(weatherData));
+
+    state.forecastData = createForecastObjects(forecastData);
+    state.forecastIconNames = createForecastObjects(forecastData).map(
+      (forecast: any) => getWeatherIcon(forecast)
+    );
   } catch (err: any) {
     throw err;
   }
