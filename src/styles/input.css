@@ -25,10 +25,10 @@ body::-webkit-scrollbar-thumb:active {
 .btn--locator {
   @apply bg-btn-bg1  grid justify-center items-center hover:bg-btn-bg1-h;
 }
-.btn--celcius {
+.btn--temp-active {
   @apply bg-primary-text text-dark-text hover:bg-primary-text-h;
 }
-.btn--farenheit {
+.btn--temp-unit {
   @apply bg-btn-bg2 text-primary-text hover:bg-btn-bg2-h;
 }
 .btn--wind {
@@ -46,10 +46,7 @@ body::-webkit-scrollbar-thumb:active {
   @apply flex justify-between text-[1.6rem];
 }
 
-/* h1 {
-  color: #26294b;
-} */
-
+/* Days Skeleton loading component */
 .day--l {
   @apply bg-secondary-bg p-6 flex flex-col text-center border border-[#26294b] rounded shadow animate-pulse dark:border-[#0c0d18];
 }

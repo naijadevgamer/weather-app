@@ -10,7 +10,6 @@ export const state: {
     query: string;
     results: any[];
   };
-  tomorrow: boolean;
   celcius: boolean;
 } = {
   weatherData: {},
@@ -21,7 +20,6 @@ export const state: {
     query: "",
     results: [],
   },
-  tomorrow: false,
   celcius: true,
 };
 
@@ -212,7 +210,6 @@ export const loadCurrentLocationWeather = async (position: any) => {
       (forecast: any) => getWeatherIcon(forecast)
     );
   } catch (err) {
-    // console.error("Error in loadCurrentLocationWeather:", err);
     throw err;
   }
 };
@@ -245,4 +242,7 @@ export const loadSearchResult = async () => {
   }
 };
 
-// loadSearchResult();
+export const changeTempUnit = (unit: string) => {
+  if (unit === "celcius") state.celcius = true;
+  else state.celcius = false;
+};
