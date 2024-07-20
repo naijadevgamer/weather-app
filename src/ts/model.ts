@@ -50,6 +50,9 @@ type WeatherObject = {
 };
 
 const createWeatherObject = (data: any): WeatherObject => {
+  if (!data || !data.main || !data.weather) {
+    throw new Error("Invalid weather data");
+  }
   return {
     city: data.name,
     temp: data.main.temp,
@@ -244,6 +247,8 @@ export const loadSearchResult = async (query: string) => {
     throw err;
   }
 };
+
+// loadSearchResult("");
 
 export const changeTempUnit = (unit: string) => {
   if (unit === "celcius") state.celcius = true;

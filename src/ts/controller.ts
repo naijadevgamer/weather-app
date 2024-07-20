@@ -19,7 +19,6 @@ const controlCurrentLocationWeather = () => {
           weatherView.renderWeather(model.state);
           forecastView.renderForecast(model.state);
           highlightView.renderHighlight(model.state);
-          console.log(model.state.weatherData, model.state.forecastData);
         } catch (err: any) {
           weatherView.renderError(err.message);
         }
@@ -60,7 +59,11 @@ const controlSearchResult = async () => {
   try {
     weatherView.renderSpinner();
     forecastView.renderSkeleton();
-    await model.loadSearchResult(searchView.getQuery());
+    const query = searchView.getQuery();
+    // if (!query) return;
+    await model.loadSearchResult(query);
+    console.log(model.state.weatherData);
+    searchView.clearInput();
     weatherView.renderWeather(model.state);
     forecastView.renderForecast(model.state);
     highlightView.renderHighlight(model.state);

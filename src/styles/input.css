@@ -87,7 +87,7 @@ body::-webkit-scrollbar-thumb:active {
 
 /* Search component functionality  */
 #search-open:checked ~ aside {
-  @apply translate-x-0;
+  @apply translate-x-full;
 }
 
 /* Custom CSS  */
