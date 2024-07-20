@@ -125,7 +125,7 @@ class ForecastView {
       "Friday",
       "Saturday",
     ];
-    todayIndex = todayIndex === 6 ? 0 : todayIndex;
+    todayIndex = todayIndex === 6 ? -1 : todayIndex;
     return days[todayIndex + 1] === days[forecastDayIndex]
       ? "Tomorrow"
       : forecast.date;

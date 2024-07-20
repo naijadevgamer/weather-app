@@ -5,6 +5,7 @@ import weatherView from "./views/weatherView";
 import highlightView from "./views/highlightView";
 import tempUnitChangeView from "./views/tempUnitChangeView";
 import searchView from "./views/searchView";
+import currentLocationView from "./views/locationView";
 
 const controlCurrentLocationWeather = () => {
   if (navigator.geolocation) {
@@ -77,3 +78,4 @@ forecastView.addHandlerClick(controlForecastClick);
 weatherView.addHandlerClick(controlCurrentWeatherClick);
 tempUnitChangeView.addHandlerClick(controlTempUnitChange);
 searchView.addHandlerSubmit(controlSearchResult);
+currentLocationView.addHandlerClick(controlCurrentLocationWeather);

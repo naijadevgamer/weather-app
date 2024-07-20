@@ -50,6 +50,7 @@ class HighlightView {
       `${this._data.weatherData.date} ${new Date().getFullYear()}`
     ).getDay();
 
+    console.log(todayIndex);
     const forecastDayIndex = new Date(
       `${forecast.date} ${new Date().getFullYear()}`
     ).getDay();
@@ -63,7 +64,8 @@ class HighlightView {
       "Friday",
       "Saturday",
     ];
-    todayIndex = todayIndex === 6 ? 0 : todayIndex;
+    todayIndex = todayIndex === 6 ? -1 : todayIndex;
+    console.log(todayIndex);
     return days[todayIndex + 1] === days[forecastDayIndex]
       ? "Tomorrow"
       : days[forecastDayIndex];
