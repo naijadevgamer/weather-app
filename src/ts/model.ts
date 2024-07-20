@@ -248,8 +248,6 @@ export const loadSearchResult = async (query: string) => {
   }
 };
 
-// loadSearchResult("");
-
 export const changeTempUnit = (unit: string) => {
   if (unit === "celcius") state.celcius = true;
   else state.celcius = false;

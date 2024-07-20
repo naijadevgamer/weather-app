@@ -1,14 +1,14 @@
-// import View from "./view";
-
 class SearchView {
   _data: any;
-  _parentElement = document.querySelector(".form") as HTMLFormElement;
+  #parentElement = document.querySelector(".form") as HTMLFormElement;
   _searchCloseInput = document.querySelector(
     "#search-close"
   ) as HTMLInputElement;
+  _isHandlerAdded = false; // Flag to check if the handler is already added
+
   // MVC: Publisher
   addHandlerSubmit(handler: any) {
-    this._parentElement.addEventListener("submit", (e: Event) => {
+    this.#parentElement.addEventListener("submit", (e: Event) => {
       e.preventDefault();
       this._searchCloseInput.checked = true;
       handler();
@@ -16,19 +16,17 @@ class SearchView {
   }
 
   getQuery() {
-    const inputEl = this._parentElement.querySelector(
-      "#city-search"
-    ) as HTMLInputElement;
-    const query = inputEl.value.trim();
+    const query = (
+      this.#parentElement.querySelector("#city-search") as HTMLInputElement
+    ).value.trim();
     if (!query) throw new Error("Search field is empty 🤦‍♂️");
     return query;
   }
 
   clearInput() {
-    const inputEl = this._parentElement.querySelector(
-      "#city-search"
-    ) as HTMLInputElement;
-    inputEl.value = "";
+    (
+      this.#parentElement.querySelector("#city-search") as HTMLInputElement
+    ).value = "";
   }
 }
 

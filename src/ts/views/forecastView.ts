@@ -136,9 +136,10 @@ class ForecastView {
       ? this._data.forecastData
           .filter((_: any, i: number) => i > 0)
           .map(
-            (forecast: any, i: number) => `<div class="day" data-date="${
-              forecast.date
-            }">
+            (
+              forecast: any,
+              i: number
+            ) => `<div class="day fade-in-bottom" data-date="${forecast.date}">
                 <p class="day__name">${this._getDay(forecast)}</p>
                 <img
                   src="images/${this._data.forecastIconNames[i]}.png"
@@ -162,7 +163,7 @@ class ForecastView {
           .join("")
       : this._data.forecastData
           .map(
-            (forecast: any, i: number) => `<div class="day">
+            (forecast: any, i: number) => `<div class="day fade-in-bottom">
                 <p class="day__name">${forecast.date}</p>
                 <img
                   src="images/${this._data.forecastIconNames[i]}.png"

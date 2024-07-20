@@ -9,15 +9,13 @@ import currentLocationView from "./views/locationView";
 
 const controlCurrentLocationWeather = () => {
   if (navigator.geolocation) {
-    weatherView.renderSpinner();
-    forecastView.renderSkeleton();
     navigator.geolocation.getCurrentPosition(
       async (position: GeolocationPosition) => {
         try {
           weatherView.renderSpinner();
           forecastView.renderSkeleton();
           await model.loadCurrentLocationWeather(position);
-          weatherView.renderWeather(model.state);
+          weatherView.render(model.state);
           forecastView.renderForecast(model.state);
           highlightView.renderHighlight(model.state);
         } catch (err: any) {
@@ -53,19 +51,17 @@ const controlCurrentWeatherClick = () => {
 const controlTempUnitChange = (unit: string) => {
   model.changeTempUnit(unit);
   tempUnitChangeView.renderTempBtn(model.state);
-  weatherView.renderWeather(model.state);
+  weatherView.update(model.state);
   forecastView.renderForecast(model.state);
 };
 const controlSearchResult = async () => {
   try {
-    weatherView.renderSpinner();
+    // weatherView.renderSpinner();
     forecastView.renderSkeleton();
     const query = searchView.getQuery();
-    // if (!query) return;
     await model.loadSearchResult(query);
-    console.log(model.state.weatherData);
     searchView.clearInput();
-    weatherView.renderWeather(model.state);
+    weatherView.render(model.state);
     forecastView.renderForecast(model.state);
     highlightView.renderHighlight(model.state);
   } catch (err: any) {
@@ -73,9 +69,12 @@ const controlSearchResult = async () => {
   }
 };
 
-controlCurrentLocationWeather();
-forecastView.addHandlerClick(controlForecastClick);
-weatherView.addHandlerClick(controlCurrentWeatherClick);
-tempUnitChangeView.addHandlerClick(controlTempUnitChange);
-searchView.addHandlerSubmit(controlSearchResult);
-currentLocationView.addHandlerClick(controlCurrentLocationWeather);
+const init = () => {
+  controlCurrentLocationWeather();
+  forecastView.addHandlerClick(controlForecastClick);
+  weatherView.addHandlerClick(controlCurrentWeatherClick);
+  tempUnitChangeView.addHandlerClick(controlTempUnitChange);
+  searchView.addHandlerSubmit(controlSearchResult);
+  currentLocationView.addHandlerClick(controlCurrentLocationWeather);
+};
+init();

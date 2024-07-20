@@ -30,9 +30,6 @@ class HighlightView {
   }
 
   _generateForecastMarkup(date: string) {
-    // this._data.forecastData.forEach((forecast: any, i: number) => {
-    //   if (i === 0) this._data.tomorrow = false;
-    // });
     return this._data.forecastData.length === 6
       ? this._data.forecastData
           .filter((_: any, i: number) => i > 0)
@@ -72,14 +69,14 @@ class HighlightView {
   }
 
   _generateForecastPreview(forecast: any) {
-    return `<h2 class="text-[2.4rem] mb-10 max-p:text-center">
+    return `<h2 class="fade-in-bottom text-[2.4rem] mb-10 max-p:text-center">
         ${this._getDay(forecast)}'s Highlight
       </h2>
       <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
       >
         <!-- Wind status -->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Wind status</h3>
 
           <!-- Wind value  -->
@@ -107,7 +104,7 @@ class HighlightView {
         </div>
 
         <!-- Humidity -->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Humidity</h3>
 
           <!-- Humidity value  -->
@@ -138,7 +135,7 @@ class HighlightView {
         </div>
 
         <!-- Visibility -->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Visibility</h3>
 
           <!-- Visibility value  -->
@@ -150,7 +147,7 @@ class HighlightView {
         </div>
 
         <!-- Air pressure-->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Air pressure</h3>
 
           <!-- Air pressure value  -->
@@ -164,14 +161,14 @@ class HighlightView {
   }
 
   _generateMarkup() {
-    return `<h2 class="text-[2.4rem] mb-10 max-p:text-center">
+    return `<h2 class="text-[2.4rem] mb-10 max-p:text-center fade-in-bottom">
         Today's Highlight
       </h2>
       <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
       >
         <!-- Wind status -->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Wind status</h3>
 
           <!-- Wind value  -->
@@ -199,7 +196,7 @@ class HighlightView {
         </div>
 
         <!-- Humidity -->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Humidity</h3>
 
           <!-- Humidity value  -->
@@ -230,7 +227,7 @@ class HighlightView {
         </div>
 
         <!-- Visibility -->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Visibility</h3>
 
           <!-- Visibility value  -->
@@ -242,7 +239,7 @@ class HighlightView {
         </div>
 
         <!-- Air pressure-->
-        <div class="bg-secondary-bg text-center p-8">
+        <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Air pressure</h3>
 
           <!-- Air pressure value  -->
