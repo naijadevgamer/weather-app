@@ -1,76 +1,41 @@
-// import View from "./view";
+import View from "./view";
 
-class HighlightView {
-  _data: any;
-  _parentElement = document.querySelector("#highlight") as HTMLDivElement;
-
-  // MVC: Publisher
-  addHandlerWeatherRender(handler: any) {
-    ["load", "hashchange"].forEach((event) =>
-      window.addEventListener(event, handler)
-    );
+class HighlightView extends View {
+  constructor() {
+    const parentElement = document.querySelector(
+      "#highlight"
+    ) as HTMLDivElement;
+    const errorMessage = "No highlight data available. Please try again later.";
+    super(parentElement, errorMessage);
   }
 
-  renderHighlight(data: any) {
+  renderForecastHighlight(data: any, date: string) {
     this._data = data;
-    const markup = this._generateMarkup();
+    const markup = this.generateForecastHighlightMarkup(date);
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
-  _clear() {
-    this._parentElement.innerHTML = "";
-  }
-
-  renderUpdate(data: any, date: string) {
-    this._data = data;
-    const markup = this._generateForecastMarkup(date);
-    this._clear();
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
-  }
-
-  _generateForecastMarkup(date: string) {
+  private generateForecastHighlightMarkup(date: string) {
     return this._data.forecastData.length === 6
       ? this._data.forecastData
           .filter((_: any, i: number) => i > 0)
           .filter((forecast: any) => date === forecast.date)
-          .map((forecast: any) => this._generateForecastPreview(forecast))
+          .map((forecast: any) =>
+            this.generateForecastHighlightPreview(forecast)
+          )
           .join("")
       : this._data.forecastData
           .filter((forecast: any) => date === forecast.date)
-          .map((forecast: any) => this._generateForecastPreview(forecast))
+          .map((forecast: any) =>
+            this.generateForecastHighlightPreview(forecast)
+          )
           .join("");
   }
 
-  _getDay(forecast: any) {
-    let todayIndex = new Date(
-      `${this._data.weatherData.date} ${new Date().getFullYear()}`
-    ).getDay();
-
-    console.log(todayIndex);
-    const forecastDayIndex = new Date(
-      `${forecast.date} ${new Date().getFullYear()}`
-    ).getDay();
-
-    const days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednessday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    todayIndex = todayIndex === 6 ? -1 : todayIndex;
-    console.log(todayIndex);
-    return days[todayIndex + 1] === days[forecastDayIndex]
-      ? "Tomorrow"
-      : days[forecastDayIndex];
-  }
-
-  _generateForecastPreview(forecast: any) {
+  private generateForecastHighlightPreview(forecast: any) {
     return `<h2 class="fade-in-bottom text-[2.4rem] mb-10 max-p:text-center">
-        ${this._getDay(forecast)}'s Highlight
+        ${this.getDay(forecast, "highlight")}'s Highlight
       </h2>
       <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"

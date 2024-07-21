@@ -11,10 +11,8 @@ export default class View {
   render(data: any) {
     if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-
     this._data = data;
     const markup = this._generateMarkup();
-
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
@@ -28,13 +26,12 @@ export default class View {
     const newElements = Array.from(newDOM.querySelectorAll("*"));
 
     const currElements = Array.from(this._parentElement.querySelectorAll("*"));
-
     newElements.forEach((newEl: any, i) => {
       const curEl = currElements[i];
       // Updates changed TEXT
       if (
         !newEl.isEqualNode(curEl) &&
-        newEl.firstChild.nodeValue.trim() !== ""
+        newEl.firstChild?.nodeValue.trim() !== ""
       ) {
         curEl.textContent = newEl.textContent;
       }
@@ -52,18 +49,42 @@ export default class View {
     this._parentElement.innerHTML = "";
   }
 
-  public renderSpinner() {
-    const markup = `
-    <div class="spinner">
-      <svg>
-        <use href="icons.svg#icon-loader"></use>
-      </svg>
-    </div>`;
+  protected getDay(forecast: any, dateType: string) {
+    let todayIndex = new Date(
+      `${this._data.weatherData.date} ${new Date().getFullYear()}`
+    ).getDay();
+
+    const forecastDayIndex = new Date(
+      `${forecast.date} ${new Date().getFullYear()}`
+    ).getDay();
+
+    const days = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednessday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+    todayIndex = todayIndex === 6 ? -1 : todayIndex;
+
+    return days[todayIndex] === days[forecastDayIndex]
+      ? "Today"
+      : days[todayIndex + 1] === days[forecastDayIndex]
+      ? "Tomorrow"
+      : dateType === "forecast"
+      ? forecast.date
+      : days[forecastDayIndex];
+  }
+
+  renderSpinner() {
+    const markup = `<div class="loader mx-auto my-60"></div>`;
     this._clear();
     this._parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
-  renderError(message: string = this._errorMessage) {
+  public renderError(message: string = this._errorMessage) {
     const markup = `
       <div class="error">
         <div>
@@ -83,6 +104,7 @@ export default class View {
       ? Math.round(temp - 273.15)
       : Math.round(((temp - 273.15) * 9) / 5 + 32);
   }
+
   protected _generateMarkup(): string {
     // Placeholder for implementation in subclass
     return "";

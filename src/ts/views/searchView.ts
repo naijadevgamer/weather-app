@@ -4,7 +4,6 @@ class SearchView {
   _searchCloseInput = document.querySelector(
     "#search-close"
   ) as HTMLInputElement;
-  _isHandlerAdded = false; // Flag to check if the handler is already added
 
   // MVC: Publisher
   addHandlerSubmit(handler: any) {
