@@ -8,7 +8,7 @@ module.exports = {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
     clean: true,
-    assetModuleFilename: "images/[hash][ext][query]",
+    assetModuleFilename: "assets/[hash][ext][query]",
   },
   resolve: {
     extensions: [".ts", ".js"],
@@ -26,6 +26,10 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif|svg|ico)$/i,
+        type: "asset/resource",
+      },
+      {
+        test: /\.(mp4|webm|ogg)$/i,
         type: "asset/resource",
       },
       {
@@ -51,6 +55,11 @@ module.exports = {
                     attribute: "href",
                     type: "src",
                   },
+                  {
+                    tag: "source",
+                    attribute: "src",
+                    type: "src",
+                  },
                 ],
               },
             },
@@ -65,7 +74,10 @@ module.exports = {
       template: "./index.html",
     }),
     new CopyWebpackPlugin({
-      patterns: [{ from: "src/images", to: "images" }],
+      patterns: [
+        { from: "src/images", to: "images" },
+        { from: "src/videos", to: "videos" },
+      ],
     }),
   ],
   devServer: {
