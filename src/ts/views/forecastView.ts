@@ -8,7 +8,7 @@ class ForecastView extends View {
   }
 
   addHandlerClick(handler: any) {
-    this._parentElement.addEventListener("click", function (e: Event) {
+    this.parentElement.addEventListener("click", function (e: Event) {
       const el = e.target as HTMLDivElement;
       const btn = el.closest(".day") as HTMLDivElement;
       if (!btn) return;
@@ -81,19 +81,19 @@ class ForecastView extends View {
           <div class="day__minmax"></div>
         </div>
       </div>`;
-    this._clear();
-    this._parentElement.insertAdjacentHTML("afterbegin", markup);
+    this.clear();
+    this.parentElement.insertAdjacentHTML("afterbegin", markup);
   }
 
-  protected _generateMarkup() {
-    return this._data.forecastData.length === 6
-      ? this._data.forecastData
+  protected generateMarkup() {
+    return this.data.forecastData.length === 6
+      ? this.data.forecastData
           .filter((_: any, i: number) => i > 0)
           .map((forecast: any, i: number) =>
             this.generateMarkupPreview(forecast, i)
           )
           .join("")
-      : this._data.forecastData
+      : this.data.forecastData
           .map((forecast: any, i: number) =>
             this.generateMarkupPreview(forecast, i)
           )
@@ -104,19 +104,19 @@ class ForecastView extends View {
     return `<div class="day fade-in-bottom" data-date="${forecast.date}">
       <p class="day__name">${this.getDay(forecast, "forecast")}</p>
       <img
-        src="images/${this._data.forecastIconNames[i]}.png"
+        src="images/${this.data.forecastIconNames[i]}.png"
         alt=""
         class="day__img"
       />
       <div class="day__temp">
         <p class="max">
-          ${this._convertTemp(forecast.maxTemp)}${
-      this._data.celcius ? "°C" : "°F"
+          ${this.convertTemp(forecast.maxTemp)}${
+      this.data.celcius ? "°C" : "°F"
     }
         </p>
         <p class="min text-secondary-text">
-          ${this._convertTemp(forecast.minTemp)}${
-      this._data.celcius ? "°C" : "°F"
+          ${this.convertTemp(forecast.minTemp)}${
+      this.data.celcius ? "°C" : "°F"
     }
         </p>
       </div>

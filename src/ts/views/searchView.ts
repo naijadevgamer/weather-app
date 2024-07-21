@@ -1,22 +1,21 @@
 class SearchView {
-  _data: any;
-  #parentElement = document.querySelector(".form") as HTMLFormElement;
-  _searchCloseInput = document.querySelector(
+  private parentElement = document.querySelector(".form") as HTMLFormElement;
+  private searchCloseInput = document.querySelector(
     "#search-close"
   ) as HTMLInputElement;
 
   // MVC: Publisher
   addHandlerSubmit(handler: any) {
-    this.#parentElement.addEventListener("submit", (e: Event) => {
+    this.parentElement.addEventListener("submit", (e: Event) => {
       e.preventDefault();
-      this._searchCloseInput.checked = true;
+      this.searchCloseInput.checked = true;
       handler();
     });
   }
 
   getQuery() {
     const query = (
-      this.#parentElement.querySelector("#city-search") as HTMLInputElement
+      this.parentElement.querySelector("#city-search") as HTMLInputElement
     ).value.trim();
     if (!query) throw new Error("Search field is empty 🤦‍♂️");
     return query;
@@ -24,7 +23,7 @@ class SearchView {
 
   clearInput() {
     (
-      this.#parentElement.querySelector("#city-search") as HTMLInputElement
+      this.parentElement.querySelector("#city-search") as HTMLInputElement
     ).value = "";
   }
 }

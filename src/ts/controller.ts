@@ -14,6 +14,7 @@ const controlCurrentLocationWeather = () => {
         try {
           weatherView.renderSpinner();
           forecastView.renderSkeleton();
+          highlightView.renderNull();
           await model.loadCurrentLocationWeather(position);
           weatherView.render(model.state);
           forecastView.render(model.state);
@@ -44,12 +45,15 @@ const controlForecastClick = (date: string) => {
 };
 
 const controlCurrentWeatherClick = () => {
-  if (model.state.weatherData.humidity) highlightView.update(model.state);
+  if (model.state.weatherData.humidity) {
+    console.log("click", model.state.weatherData.humidity);
+    highlightView.update(model.state);
+  }
 };
 
 const controlTempUnitChange = (unit: string) => {
   model.changeTempUnit(unit);
-  tempUnitChangeView.renderTempBtn(model.state);
+  tempUnitChangeView.update(model.state);
   weatherView.update(model.state);
   forecastView.update(model.state);
 };
@@ -57,6 +61,7 @@ const controlSearchResult = async () => {
   try {
     weatherView.renderSpinner();
     forecastView.renderSkeleton();
+    highlightView.renderSpinner();
     const query = searchView.getQuery();
     await model.loadSearchResult(query);
     searchView.clearInput();
