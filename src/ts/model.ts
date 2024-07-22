@@ -28,7 +28,7 @@ export const state: {
 /**
  * Represents a forecast object with relevant weather details.
  */
-type ForecastObject = {
+export type ForecastObject = {
   city: string;
   id: number;
   temp: number; // Temperature in Kelvin

@@ -70,7 +70,7 @@ const controlCurrentWeatherClick = () => {
  * Control function to handle changes in temperature units.
  * @param unit - The temperature unit to change to ('celcius' or 'fahrenheit').
  */
-const controlTempUnitChange = (unit: string) => {
+const controlTempUnitChange = (unit: "celcius" | "fahrenheit") => {
   model.changeTempUnit(unit);
 
   // Update all views with the new temperature unit
