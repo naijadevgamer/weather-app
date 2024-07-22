@@ -72,7 +72,7 @@ const controlSearchResult = async () => {
 };
 
 const init = () => {
-  // weatherView.addHandlerWeatherRender(controlCurrentLocationWeather);
+  weatherView.addHandlerWeatherRender(controlCurrentLocationWeather);
   forecastView.addHandlerClick(controlForecastClick);
   weatherView.addHandlerClick(controlCurrentWeatherClick);
   tempUnitChangeView.addHandlerClick(controlTempUnitChange);

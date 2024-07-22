@@ -1,104 +1,128 @@
 import { API_KEY } from "./config";
-import { formatDate } from "./helper";
+import {
+  formatDate,
+  convertMetersToMiles,
+  convertSpeedToMph,
+  formatWeatherDescription,
+} from "./helper";
 
+/**
+ * Application state including weather and forecast data.
+ */
 export const state: {
-  weatherData: Record<string, any>;
+  weatherData: WeatherObject;
   weatherIconName: string;
-  forecastData: Record<string, any>;
+  forecastData: ForecastObject[];
   forecastIconNames: string[];
   query: string;
   celcius: boolean;
 } = {
-  weatherData: {},
+  weatherData: {} as WeatherObject,
   weatherIconName: "",
-  forecastData: {},
+  forecastData: [] as ForecastObject[],
   forecastIconNames: [],
   query: "",
   celcius: true,
 };
 
+/**
+ * Represents a forecast object with relevant weather details.
+ */
 type ForecastObject = {
   city: string;
   id: number;
-  temp: number; // Kelvin
+  temp: number; // Temperature in Kelvin
   maxTemp: number;
   minTemp: number;
   weatherIcon: string;
   weatherName: string;
   weatherId: number;
   date: string; // Formatted date (e.g., "Fri, 5 Jun")
-  windStatus: number; // miles/hour
-  windDirection: number; // degrees
-  humidity: number; // percentage
-  visibility: number; // miles
-  airPressure: number; // mb (hPa)
+  windStatus: number; // Wind speed in miles/hour
+  windDirection: number; // Wind direction in degrees
+  humidity: number; // Humidity in percentage
+  visibility: number; // Visibility in miles
+  airPressure: number; // Air pressure in mb (hPa)
 };
 
+/**
+ * Represents a weather object with current weather details.
+ */
 type WeatherObject = {
   city: string;
-  id: number;
-  temp: number; // kelvin
+  temp: number; // Temperature in Kelvin
   weatherIcon: string;
   weatherName: string;
   weatherId: number;
-  date: string; // Unix timestamp
-  windStatus: number; // miles/hour
-  windDirection: number; // degrees
-  humidity: number; // percentage
-  visibility: number; // miles
-  airPressure: number; // mb (hPa)
+  date: string; // Date in Unix timestamp
+  windStatus: number; // Wind speed in miles/hour
+  windDirection: number; // Wind direction in degrees
+  humidity: number; // Humidity in percentage
+  visibility: number; // Visibility in miles
+  airPressure: number; // Air pressure in mb (hPa)
 };
 
+/**
+ * Creates a WeatherObject from the API data.
+ * @param data - The weather data from the API.
+ * @returns A WeatherObject instance.
+ * @throws An error if the data is invalid.
+ */
 const createWeatherObject = (data: any): WeatherObject => {
   if (!data || !data.main || !data.weather) {
     throw new Error("Invalid weather data");
   }
+
   return {
     city: data.name,
     temp: data.main.temp,
     weatherIcon: data.weather[0].icon,
-    weatherName:
-      data.weather[0].description[0].toUpperCase() +
-      data.weather[0].description.slice(1),
+    weatherName: formatWeatherDescription(data.weather[0].description),
     weatherId: data.weather[0].id,
     date: formatDate(data.dt),
-    windStatus: Math.round(data.wind.speed * 2.237), // Converting meters/second to mph
-    windDirection: data.wind.deg, // degrees
-    humidity: data.main.humidity, // percentage
-    visibility: (data.visibility / 1609.34).toFixed(1), // Converting meters to miles
+    windStatus: convertSpeedToMph(data.wind.speed),
+    windDirection: data.wind.deg,
+    humidity: data.main.humidity,
+    visibility: convertMetersToMiles(data.visibility),
     airPressure: Math.round(data.main.pressure),
-    ...(data.id && { id: data.id }),
   };
 };
 
-// Function to create forecast object for each day
+/**
+ * Creates an array of forecast objects from the provided data.
+ *
+ * @param {any} data - The raw forecast data from the API.
+ * @returns {ForecastObject[]} - An array of formatted forecast objects.
+ */
 const createForecastObjects = (data: any): ForecastObject[] => {
   const dailyData: { [key: string]: ForecastObject } = {};
 
+  // Process each forecast item
   data.list.forEach((item: any) => {
     const date = new Date(item.dt * 1000).toLocaleDateString("en-US");
 
     if (!dailyData[date]) {
+      // Initialize a new entry for this date
       dailyData[date] = {
         city: data.city.name,
         id: data.city.id,
-        temp: item.main.temp, // Kelvin
-        maxTemp: item.main.temp_max, // Kelvin
-        minTemp: item.main.temp_min, // Kelvin
+        temp: item.main.temp,
+        maxTemp: item.main.temp_max,
+        minTemp: item.main.temp_min,
         weatherIcon: item.weather[0].icon,
         weatherName: item.weather[0].main,
         weatherId: item.weather[0].id,
         date: formatDate(item.dt),
-        windStatus: item.wind.speed * 2.237, // meters/second to miles/hour
-        windDirection: item.wind.deg, // degrees
-        humidity: item.main.humidity, // percentage
-        visibility: item.visibility / 1609.34, // meters to miles
-        airPressure: item.main.pressure, // hPa to mb (they are equivalent)
+        windStatus: item.wind.speed * 2.237, // Convert meters/second to miles/hour
+        windDirection: item.wind.deg,
+        humidity: item.main.humidity,
+        visibility: item.visibility / 1609.34, // Convert meters to miles
+        airPressure: item.main.pressure,
       };
     } else {
-      // Get icon at time closest to mid-day
+      // Update existing entry for this date
       if (new Date(item.dt * 1000).getHours() === 13)
-        dailyData[date].weatherIcon = item.weather[0].icon;
+        dailyData[date].weatherIcon = item.weather[0].icon; // Update icon if closest to midday
       dailyData[date].temp += item.main.temp;
       dailyData[date].maxTemp = Math.max(
         dailyData[date].maxTemp,
@@ -115,6 +139,7 @@ const createForecastObjects = (data: any): ForecastObject[] => {
     }
   });
 
+  // Average out the values for each day
   const forecastArray = Object.values(dailyData).map((forecast) => {
     const entriesCount = data.list.filter(
       (item: any) => formatDate(item.dt) === forecast.date
@@ -133,46 +158,48 @@ const createForecastObjects = (data: any): ForecastObject[] => {
   return forecastArray;
 };
 
-const getWeatherIcon = (data: WeatherObject): string => {
+/**
+ * Maps weather icon codes to descriptive weather conditions.
+ *
+ * @param {WeatherObject} data - The weather object containing icon and id.
+ * @returns {string} - The descriptive weather condition.
+ */
+const getWeatherIcon = (data: WeatherObject | ForecastObject): string => {
+  // Determine the weather condition based on icon code and id
   if (data.weatherIcon === "11d" || data.weatherIcon === "11n")
     return "Thunderstorm";
-
   if (data.weatherIcon === "09d" || data.weatherIcon === "09n") {
     if ([302, 312].includes(data.weatherId)) return "HeavyRain";
     if ([313, 314, 321, 521, 522, 531].includes(data.weatherId))
       return "Shower";
     return "LightRain";
   }
-
   if (data.weatherIcon === "10d" || data.weatherIcon === "10n") {
     if ([500, 501].includes(data.weatherId)) return "LightRain";
     return "HeavyRain";
   }
-
   if (data.weatherIcon === "13d" || data.weatherIcon === "13n") {
-    if (data.weatherId === 511) return "Haill";
+    if (data.weatherId === 511) return "Hail";
     if ([600, 601, 602].includes(data.weatherId)) return "Snow";
     return "Sleet";
   }
-
   if (data.weatherIcon === "50d" || data.weatherIcon === "50n") return "Mist";
   if (data.weatherIcon === "01d" || data.weatherIcon === "01n") return "Clear";
-
-  if (
-    data.weatherIcon === "02d" ||
-    data.weatherIcon === "02n" ||
-    data.weatherIcon === "03d" ||
-    data.weatherIcon === "03n"
-  )
+  if (["02d", "02n", "03d", "03n"].includes(data.weatherIcon))
     return "LightCloud";
-
   if (data.weatherIcon === "04d" || data.weatherIcon === "04n")
     return "HeavyCloud";
-
   return "";
 };
 
-export const loadCurrentLocationWeather = async (position: any) => {
+/**
+ * Fetch current weather and forecast data based on geolocation.
+ * @param position - Geolocation position object
+ * @throws Error if fetch fails or response is not ok
+ */
+export const loadCurrentLocationWeather = async (
+  position: GeolocationPosition
+): Promise<void> => {
   try {
     const { latitude: lat, longitude: lon } = position.coords;
 
@@ -185,33 +212,39 @@ export const loadCurrentLocationWeather = async (position: any) => {
       ),
     ]);
 
+    // Check if responses are ok
+    [weatherRes, forecastRes].forEach((res, i) => {
+      if (!res.ok) {
+        throw new Error(
+          `${[weatherRes, forecastRes][i].statusText} ${res.status}`
+        );
+      }
+    });
+
     const [weatherData, forecastData] = await Promise.all([
       weatherRes.json(),
       forecastRes.json(),
     ]);
 
-    [weatherRes, forecastRes].forEach((res, i) => {
-      if (!res.ok)
-        throw new Error(
-          `${[weatherData, forecastData][i].message} ${res.status} ${
-            res.statusText
-          }`
-        );
-    });
-
+    // Update state with the fetched data
     state.weatherData = createWeatherObject(weatherData);
-    state.weatherIconName = getWeatherIcon(createWeatherObject(weatherData));
-
+    state.weatherIconName = getWeatherIcon(state.weatherData);
     state.forecastData = createForecastObjects(forecastData);
-    state.forecastIconNames = createForecastObjects(forecastData).map(
-      (forecast: any) => getWeatherIcon(forecast)
+    state.forecastIconNames = state.forecastData.map((forecast) =>
+      getWeatherIcon(forecast)
     );
   } catch (err) {
+    console.error("Failed to load current location weather:", err);
     throw err;
   }
 };
 
-export const loadSearchResult = async (query: string) => {
+/**
+ * Fetch weather and forecast data based on search query.
+ * @param query - City name or search query
+ * @throws Error if fetch fails or response is not ok
+ */
+export const loadSearchResult = async (query: string): Promise<void> => {
   try {
     state.query = query;
     const [weatherRes, forecastRes] = await Promise.all([
@@ -222,33 +255,38 @@ export const loadSearchResult = async (query: string) => {
         `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=${API_KEY}`
       ),
     ]);
+
+    // Check if responses are ok
+    [weatherRes, forecastRes].forEach((res, i) => {
+      if (!res.ok) {
+        throw new Error(
+          `${[weatherRes, forecastRes][i].statusText} ${res.status}`
+        );
+      }
+    });
+
     const [weatherData, forecastData] = await Promise.all([
       weatherRes.json(),
       forecastRes.json(),
     ]);
 
-    [weatherRes, forecastRes].forEach((res, i) => {
-      if (!res.ok)
-        throw new Error(
-          `${[weatherData, forecastData][i].message} ${res.status} ${
-            res.statusText
-          }`
-        );
-    });
-
+    // Update state with the fetched data
     state.weatherData = createWeatherObject(weatherData);
-    state.weatherIconName = getWeatherIcon(createWeatherObject(weatherData));
-
+    state.weatherIconName = getWeatherIcon(state.weatherData);
     state.forecastData = createForecastObjects(forecastData);
-    state.forecastIconNames = createForecastObjects(forecastData).map(
-      (forecast: any) => getWeatherIcon(forecast)
+    state.forecastIconNames = state.forecastData.map((forecast) =>
+      getWeatherIcon(forecast)
     );
-  } catch (err: any) {
+  } catch (err) {
+    console.error("Failed to load search results:", err);
     throw err;
   }
 };
 
-export const changeTempUnit = (unit: string) => {
-  if (unit === "celcius") state.celcius = true;
-  else state.celcius = false;
+/**
+ * Change the temperature unit between Celsius and Fahrenheit.
+ * @param unit - Desired temperature unit ("celcius" or "fahrenheit")
+ */
+export const changeTempUnit = (unit: "celcius" | "fahrenheit"): void => {
+  state.celcius = unit === "celcius";
 };
