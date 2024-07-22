@@ -1,5 +1,9 @@
 import View from "./view";
 
+/**
+ * A view class for displaying weather information.
+ * Extends the base `View` class and provides specific implementations for rendering weather data.
+ */
 class WeatherView extends View {
   constructor() {
     const parentElement = document.querySelector("#weather") as HTMLElement;
@@ -7,21 +11,42 @@ class WeatherView extends View {
     super(parentElement, errorMessage);
   }
 
+  /**
+   * Adds an event handler for the window load event to render weather data.
+   * @param handler - The function to execute when the window loads.
+   */
   addHandlerWeatherRender(handler: () => void) {
     window.addEventListener("load", handler);
   }
 
+  /**
+   * Adds a click event handler to the weather element.
+   * @param handler - The function to execute when a click event occurs.
+   */
   addHandlerClick(handler: () => void) {
     this.parentElement.addEventListener("click", (e: Event) => {
       const el = e.target as HTMLElement;
+
+      // Ignore clicks when there is an error message
       if ((el.children[0] as HTMLDivElement)?.classList.contains("error"))
         return;
+
       handler();
     });
   }
 
+  /**
+   * Generates the HTML markup for rendering the weather data.
+   * @returns The HTML markup as a string.
+   */
   protected generateMarkup(): string {
-    return `<!-- Weather image  -->
+    // Convert temperature and determine units
+    const temp = this.convertTemp(this.data.weatherData.temp);
+    const unit = this.data.celcius ? "°C" : "°F";
+
+    // Construct and return the markup
+    return `
+      <!-- Weather image -->
       <div
         class="w-full h-[37.6rem] relative grid justify-items-center items-center my-auto max-tl:my-20 max-tp:h-[25rem] max-p:mt-10 max-p:mb-10 fade-in-bottom"
       >
@@ -37,22 +62,20 @@ class WeatherView extends View {
         />
       </div>
 
-      <!-- Weather Temp Value  -->
+      <!-- Weather Temp Value -->
       <div class="mx-auto px-16 max-tl:px-7 fade-in-bottom">
-        <span class="text-[14.4rem]"
-          >${this.convertTemp(this.data.weatherData.temp)}</span
-        ><span class="text-[4.8rem] text-secondary-text"
-          >${this.data.celcius ? "°C" : "°F"}</span
-        >
+        <span class="text-[14.4rem]">${temp}</span>
+        <span class="text-[4.8rem] text-secondary-text">${unit}</span>
       </div>
-      <!-- Weather Name  -->
+
+      <!-- Weather Name -->
       <p
         class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10 fade-in-bottom"
       >
         ${this.data.weatherData.weatherName}
       </p>
 
-      <!-- Weather Date  -->
+      <!-- Weather Date -->
       <div
         class="mx-auto flex items-center text-secondary-text mb-8 text-[1.8rem] px-16 max-tl:px-7 max-p:mt-auto fade-in-bottom"
       >
@@ -61,7 +84,7 @@ class WeatherView extends View {
         <p>${this.data.weatherData.date}</p>
       </div>
 
-      <!-- Weather Location  -->
+      <!-- Weather Location -->
       <div
         class="text-secondary-text mx-auto flex items-center px-16 max-tl:px-7 fade-in-bottom"
       >
@@ -69,7 +92,8 @@ class WeatherView extends View {
           <use xlink:href="images/sprite.svg#icon-location-pin"></use>
         </svg>
         <p class="city font-semibold">${this.data.weatherData.city}</p>
-      </div>`;
+      </div>
+    `;
   }
 }
 
