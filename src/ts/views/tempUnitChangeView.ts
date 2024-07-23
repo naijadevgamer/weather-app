@@ -25,7 +25,18 @@ class TempUnitSwitchView extends View {
       const target = e.target as HTMLElement;
       const button = target.closest(".btn") as HTMLButtonElement;
 
-      if (!button) return;
+      if (!button || !this.data) return;
+
+      console.log(this.data);
+
+      // const el = e.currentTarget as HTMLElement;
+
+      // // Ignore clicks when there is an error message or when loading
+      // const firstChild = el.children[0] as HTMLDivElement;
+      // const isClassPresent = ["error", "loader"].some((className) =>
+      //   firstChild.classList.contains(className)
+      // );
+      // if (isClassPresent) return;
 
       // Determine which button was clicked and invoke the handler with the appropriate unit
       const unit = button.classList.contains("celcius")

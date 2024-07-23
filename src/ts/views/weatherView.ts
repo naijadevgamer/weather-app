@@ -28,11 +28,11 @@ class WeatherView extends View {
       const el = e.currentTarget as HTMLElement;
 
       // Ignore clicks when there is an error message or when loading
-      const firstChild = el.children[0] as HTMLDivElement;
-      const isClassPresent = ["error", "loader"].some((className) =>
-        firstChild.classList.contains(className)
-      );
-      if (isClassPresent) return;
+      // const firstChild = el.children[0] as HTMLDivElement;
+      // const isClassPresent = ["error", "loader"].some((className) =>
+      //   firstChild.classList.contains(className)
+      // );
+      if (!this.data) return;
       handler();
     });
   }

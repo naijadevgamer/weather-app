@@ -21,9 +21,8 @@ export default class View {
    * @param data - Data to be rendered.
    */
   render(data: any) {
-    if (!data || (Array.isArray(data) && data.length === 0)) {
+    if (!data || (Array.isArray(data) && data.length === 0))
       return this.renderError();
-    }
     this.data = data;
     const markup = this.generateMarkup();
     this.clear();
@@ -35,6 +34,8 @@ export default class View {
    * @param data - New data to update the view with.
    */
   update(data: any) {
+    if (!data || (Array.isArray(data) && data.length === 0))
+      return this.renderError();
     this.data = data;
     const newMarkup = this.generateMarkup();
 
