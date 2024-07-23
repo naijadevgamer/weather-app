@@ -108,6 +108,7 @@ class HighlightView extends View {
 
     // Filter forecast data for the specific date and generate markup
     return itemsToRender
+      .filter((forecast: any) => forecast.date === date)
       .map((forecast: any) => this.generateForecastHighlightPreview(forecast))
       .join("");
   }
@@ -125,11 +126,10 @@ class HighlightView extends View {
         : `${45 - forecast.windDirection}deg`;
 
     return `
-      <div class="highlight-item">
-        <h2 class="fade-in-bottom text-[2.4rem] mb-10 max-p:text-center">
-          ${this.getDay(forecast, "highlight")}'s Highlight
-        </h2>
-       <div
+      <h2 class="fade-in-bottom text-[2.4rem] mb-10 max-p:text-center">
+        ${this.getDay(forecast, "highlight")}'s Highlight
+      </h2>
+      <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
       >
         <!-- Wind status -->
@@ -138,9 +138,8 @@ class HighlightView extends View {
 
           <!-- Wind value  -->
           <p class="text-[6.4rem]">
-            <span>${Math.round(
-              forecast.windStatus
-            )}</span><span class="text-[3.6rem]">mph</span>
+            <span>${Math.round(forecast.windStatus)}</span
+            ><span class="text-[3.6rem]">mph</span>
           </p>
 
           <!-- Wind visual  -->
@@ -148,7 +147,10 @@ class HighlightView extends View {
             class="text-secondary-text mx-auto flex items-center justify-center"
           >
             <div class="btn btn--wind mr-4">
-              <svg class="fill-primary-text h-6 w-6" style="rotate: ${windRotation}">
+              <svg
+                class="fill-primary-text h-6 w-6"
+                style="rotate: ${windRotation}"
+              >
                 <use xlink:href="images/sprite.svg#icon-compass"></use>
               </svg>
             </div>
@@ -156,15 +158,14 @@ class HighlightView extends View {
           </div>
         </div>
 
-          <!-- Humidity -->
+        <!-- Humidity -->
         <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Humidity</h3>
 
           <!-- Humidity value  -->
           <p class="text-[6.4rem]">
-            <span>${Math.round(
-              forecast.humidity
-            )}</span><span class="text-[3.6rem]">%</span>
+            <span>${Math.round(forecast.humidity)}</span
+            ><span class="text-[3.6rem]">%</span>
           </p>
 
           <!-- Humidity range bar  -->
@@ -179,9 +180,12 @@ class HighlightView extends View {
             <div
               class="w-full h-[8px] rounded-3xl overflow-hidden bg-primary-text"
             >
-              <p class=" bg-range-bg h-full" style="width: ${Math.round(
-                forecast.humidity
-              )}%; transition: all 10s ease 3s"></p>
+              <p
+                class="bg-range-bg h-full"
+                style="width: ${Math.round(
+                  forecast.humidity
+                )}%; transition: all 10s ease 3s"
+              ></p>
             </div>
             <div class="flex justify-end px-1">%</div>
           </div>
@@ -193,9 +197,8 @@ class HighlightView extends View {
 
           <!-- Visibility value  -->
           <p class="text-[6.4rem]">
-            <span>${forecast.visibility.toFixed(
-              1
-            )}</span><span class="text-[3.6rem]"> miles</span>
+            <span>${forecast.visibility.toFixed(1)}</span
+            ><span class="text-[3.6rem]"> miles</span>
           </p>
         </div>
 
@@ -205,12 +208,12 @@ class HighlightView extends View {
 
           <!-- Air pressure value  -->
           <p class="text-[6.4rem]">
-            <span>${Math.round(
-              forecast.airPressure
-            )}</span><span class="text-[3.6rem]"> mb</span>
+            <span>${Math.round(forecast.airPressure)}</span
+            ><span class="text-[3.6rem]"> mb</span>
           </p>
         </div>
-      </div>`;
+      </div>
+    `;
   }
 
   /**
@@ -224,8 +227,9 @@ class HighlightView extends View {
         ? `${this.data.weatherData.windDirection - 45}deg`
         : `${45 - this.data.weatherData.windDirection}deg`;
 
-    return `
-      <h2 class="text-[2.4rem] mb-10 max-p:text-center fade-in-bottom">
+    return `<h2
+        class="text-[2.4rem] mb-10 max-p:text-center fade-in-bottom"
+      >
         Today's Highlight
       </h2>
       <div
@@ -234,12 +238,21 @@ class HighlightView extends View {
         <!-- Wind status -->
         <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Wind status</h3>
+          <!-- Wind value  -->
           <p class="text-[6.4rem]">
-            <span>${this.data.weatherData.windStatus}</span><span class="text-[3.6rem]">mph</span>
+            <span>${this.data.weatherData.windStatus}</span
+            ><span class="text-[3.6rem]">mph</span>
           </p>
-          <div class="text-secondary-text mx-auto flex items-center justify-center">
+
+          <!-- Wind visual  -->
+          <div
+            class="text-secondary-text mx-auto flex items-center justify-center"
+          >
             <div class="btn btn--wind mr-4">
-              <svg class="fill-primary-text h-6 w-6" style="rotate: ${windRotation}">
+              <svg
+                class="fill-primary-text h-6 w-6"
+                style="rotate: ${windRotation}"
+              >
                 <use xlink:href="images/sprite.svg#icon-compass"></use>
               </svg>
             </div>
@@ -250,17 +263,29 @@ class HighlightView extends View {
         <!-- Humidity -->
         <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Humidity</h3>
+
+          <!-- Humidity value  -->
           <p class="text-[6.4rem]">
-            <span>${this.data.weatherData.humidity}</span><span class="text-[3.6rem]">%</span>
+            <span>${this.data.weatherData.humidity}</span
+            ><span class="text-[3.6rem]">%</span>
           </p>
-          <div class="w-[22.9rem] mx-auto text-[1.2rem] text-tertiary-text max-tl:w-[90%]">
+
+          <!-- Humidity range bar  -->
+          <div
+            class="w-[22.9rem] mx-auto text-[1.2rem] text-tertiary-text max-tl:w-[90%]"
+          >
             <p class="flex justify-between px-1">
               <span class="inline-block">0</span>
               <span class="inline-block">50</span>
               <span class="inline-block">100</span>
             </p>
-            <div class="w-full h-[8px] rounded-3xl overflow-hidden bg-primary-text">
-              <p class="bg-range-bg h-full" style="width: ${this.data.weatherData.humidity}%;"></p>
+            <div
+              class="w-full h-[8px] rounded-3xl overflow-hidden bg-primary-text"
+            >
+              <p
+                class="bg-range-bg h-full"
+                style="width: ${this.data.weatherData.humidity}%;"
+              ></p>
             </div>
             <div class="flex justify-end px-1">%</div>
           </div>
@@ -269,16 +294,22 @@ class HighlightView extends View {
         <!-- Visibility -->
         <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Visibility</h3>
+
+          <!-- Visibility value  -->
           <p class="text-[6.4rem]">
-            <span>${this.data.weatherData.visibility}</span><span class="text-[3.6rem]"> miles</span>
+            <span>${this.data.weatherData.visibility}</span
+            ><span class="text-[3.6rem]"> miles</span>
           </p>
         </div>
 
         <!-- Air pressure -->
         <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Air pressure</h3>
+
+          <!-- Air pressure value  -->
           <p class="text-[6.4rem]">
-            <span>${this.data.weatherData.airPressure}</span><span class="text-[3.6rem]"> mb</span>
+            <span>${this.data.weatherData.airPressure}</span
+            ><span class="text-[3.6rem]"> mb</span>
           </p>
         </div>
       </div>`;

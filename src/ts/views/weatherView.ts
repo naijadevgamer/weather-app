@@ -25,12 +25,14 @@ class WeatherView extends View {
    */
   addHandlerClick(handler: () => void) {
     this.parentElement.addEventListener("click", (e: Event) => {
-      const el = e.target as HTMLElement;
+      const el = e.currentTarget as HTMLElement;
 
-      // Ignore clicks when there is an error message
-      if ((el.children[0] as HTMLDivElement)?.classList.contains("error"))
-        return;
-
+      // Ignore clicks when there is an error message or when loading
+      const firstChild = el.children[0] as HTMLDivElement;
+      const isClassPresent = ["error", "loader"].some((className) =>
+        firstChild.classList.contains(className)
+      );
+      if (isClassPresent) return;
       handler();
     });
   }
