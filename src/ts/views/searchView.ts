@@ -15,6 +15,7 @@ class SearchView {
   addHandlerSubmit(handler: () => void): void {
     this.parentElement.addEventListener("submit", (e: Event) => {
       e.preventDefault();
+
       // Check the close input to close the aside bar when form is submitted
       this.searchCloseInput.checked = true;
       handler();

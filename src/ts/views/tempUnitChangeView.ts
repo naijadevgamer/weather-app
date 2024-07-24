@@ -5,6 +5,7 @@ import View from "./view";
  * Handles user interaction for switching between Celsius and Fahrenheit.
  */
 class TempUnitSwitchView extends View {
+  private weatherEl;
   /**
    * Creates an instance of TempUnitSwitchView.
    */
@@ -14,6 +15,7 @@ class TempUnitSwitchView extends View {
       "#unit-switch"
     ) as HTMLDivElement;
     super(parentElement, "");
+    this.weatherEl = document.querySelector("#weather") as HTMLElement;
   }
 
   /**
@@ -25,18 +27,14 @@ class TempUnitSwitchView extends View {
       const target = e.target as HTMLElement;
       const button = target.closest(".btn") as HTMLButtonElement;
 
-      if (!button || !this.data) return;
-
-      console.log(this.data);
-
-      // const el = e.currentTarget as HTMLElement;
+      if (!button) return;
 
       // // Ignore clicks when there is an error message or when loading
-      // const firstChild = el.children[0] as HTMLDivElement;
-      // const isClassPresent = ["error", "loader"].some((className) =>
-      //   firstChild.classList.contains(className)
-      // );
-      // if (isClassPresent) return;
+      const firstChild = this.weatherEl.children[0] as HTMLDivElement;
+      const isClassPresent = ["error", "loader"].some((className) =>
+        firstChild.classList.contains(className)
+      );
+      if (isClassPresent) return;
 
       // Determine which button was clicked and invoke the handler with the appropriate unit
       const unit = button.classList.contains("celcius")

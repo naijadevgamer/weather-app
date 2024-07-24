@@ -9,7 +9,7 @@ import {
 /**
  * Application state including weather and forecast data.
  */
-export const state: {
+export let state: {
   weatherData: WeatherObject;
   weatherIconName: string;
   forecastData: ForecastObject[];

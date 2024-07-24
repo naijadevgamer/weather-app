@@ -38,6 +38,8 @@ const controlCurrentLocationWeather = () => {
         weatherView.renderError(
           "Could not get your position: " + error.message
         );
+        forecastView.renderSkeleton();
+        highlightView.renderNull();
       },
       {
         enableHighAccuracy: true, // Request high accuracy for the location
@@ -48,6 +50,8 @@ const controlCurrentLocationWeather = () => {
   } else {
     // Handle case where geolocation is not supported
     weatherView.renderError("Geolocation is not supported by your browser.");
+    forecastView.renderSkeleton();
+    highlightView.renderNull();
   }
 };
 
@@ -72,7 +76,6 @@ const controlCurrentWeatherClick = () => {
  */
 const controlTempUnitChange = (unit: "celcius" | "fahrenheit") => {
   model.changeTempUnit(unit);
-
   // Update all views with the new temperature unit
   tempUnitChangeView.update(model.state);
   weatherView.update(model.state);
@@ -87,7 +90,7 @@ const controlSearchResult = async () => {
     // Render loading states
     weatherView.renderSpinner();
     forecastView.renderSkeleton();
-    highlightView.renderSpinner();
+    highlightView.renderNull();
 
     // Get search query and fetch results
     const query = searchView.getQuery();
