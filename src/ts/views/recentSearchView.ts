@@ -1,8 +1,8 @@
 import View from "./view";
 
 /**
- * Class representing the temperature unit switch view.
- * Handles user interaction for switching between Celsius and Fahrenheit.
+ * Class representing the Recent Search View.
+ * Generates recent search results. Also handles search results based on recent search click
  */
 class RecentSearchView extends View {
   private searchCloseInput = document.querySelector(
@@ -12,7 +12,7 @@ class RecentSearchView extends View {
    * Creates an instance of RecentSearchView.
    */
   constructor() {
-    // Initialize the parent element for the unit switch
+    // Initialize the parent element for the RecentSearchView
     const parentElement = document.querySelector(
       ".results-wrapper"
     ) as HTMLDivElement;
@@ -20,26 +20,26 @@ class RecentSearchView extends View {
   }
 
   /**
-   * Adds a click event handler to the unit switch buttons.
-   * @param handler - The function to be called with the selected unit ("celsius" or "fahrenheit").
+   * Adds a click event handler to the recent search buttons.
+   * @param handler - The function to be called with the selected unit (query).
    */
-  addHandlerClick(handler: (text: string) => void): void {
+  addHandlerClick(handler: (query: string) => void): void {
     this.parentElement.addEventListener("click", (e: Event) => {
       const target = e.target as HTMLElement;
       const button = target.closest(".result") as HTMLButtonElement;
 
       if (!button) return;
-      const text =
+      const query =
         (button.querySelector("p") as HTMLParagraphElement).textContent || "";
 
-      // Check the close input to close the aside bar when form is submitted
+      // Check the close input to close the aside bar when button is clicked
       this.searchCloseInput.checked = true;
-      handler(text);
+      handler(query);
     });
   }
 
   /**
-   * Generates the markup for the temperature unit switch buttons.
+   * Generates the markup for the recent search buttons.
    * @returns The HTML markup as a string.
    */
   protected generateMarkup(): string {

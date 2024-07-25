@@ -32,7 +32,6 @@ export let state: {
  */
 export type ForecastObject = {
   city: string;
-  id: number;
   temp: number; // Temperature in Kelvin
   maxTemp: number;
   minTemp: number;
@@ -107,7 +106,6 @@ const createForecastObjects = (data: any): ForecastObject[] => {
       // Initialize a new entry for this date
       dailyData[date] = {
         city: data.city.name,
-        id: data.city.id,
         temp: item.main.temp,
         maxTemp: item.main.temp_max,
         minTemp: item.main.temp_min,
@@ -241,13 +239,18 @@ export const loadCurrentLocationWeather = async (
   }
 };
 
+/**
+ * Persist the recent search array base on query to the local storage
+ */
 const persistRecentSearch = (): void => {
+  // Return if query is already present
   if (state.recent.includes(state.query)) return;
-  // console.log(state.recent.includes(state.query));
+
+  // Checks if the array can take in more recent search query
   if (state.recent.length < 3) state.recent.unshift(state.query);
   else {
-    state.recent.pop();
-    state.recent.unshift(state.query);
+    state.recent.pop(); // Remove the last value
+    state.recent.unshift(state.query); // Add to recent from the front
   }
 
   localStorage.setItem("recent", JSON.stringify(state.recent));
@@ -293,7 +296,6 @@ export const loadSearchResult = async (query: string): Promise<void> => {
     );
     persistRecentSearch();
   } catch (err) {
-    console.error("Failed to load search results:", err);
     throw err;
   }
 };

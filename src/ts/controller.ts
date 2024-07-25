@@ -97,25 +97,28 @@ const controlSearchResult = async () => {
     // Get search query and fetch results
     const query = searchView.getQuery();
     await model.loadSearchResult(query);
-    console.log(model.state.recent);
 
-    recentSearchView.render(model.state);
     // Clear search input and render results
     searchView.clearInput();
     weatherView.render(model.state);
     forecastView.render(model.state);
     highlightView.render(model.state);
+    recentSearchView.render(model.state);
   } catch (err: any) {
     weatherView.renderError(err.message);
   }
 };
 
+/**
+ * Control function to handle search results based on receent search buttons.
+ */
 const controlRecent = async (query: string) => {
   try {
     // Render loading states
     weatherView.renderSpinner();
     forecastView.renderSkeleton();
     highlightView.renderNull();
+
     await model.loadSearchResult(query);
 
     weatherView.render(model.state);
