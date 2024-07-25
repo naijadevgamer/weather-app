@@ -133,8 +133,9 @@ const controlRecent = async (query: string) => {
  * Initialize the application by setting up event handlers.
  */
 const init = () => {
+  // Render weather data
+  controlCurrentLocationWeather();
   // Add event handlers for each view
-  weatherView.addHandlerWeatherRender(controlCurrentLocationWeather);
   forecastView.addHandlerClick(controlForecastClick);
   weatherView.addHandlerClick(controlCurrentWeatherClick);
   tempUnitChangeView.addHandlerClick(controlTempUnitChange);
@@ -145,5 +146,3 @@ const init = () => {
 
 // Initialize the app
 init();
-
-// localStorage.clear();

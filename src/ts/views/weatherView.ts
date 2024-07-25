@@ -12,14 +12,6 @@ class WeatherView extends View {
   }
 
   /**
-   * Adds an event handler for the window load event to render weather data.
-   * @param handler - The function to execute when the window loads.
-   */
-  addHandlerWeatherRender(handler: () => void) {
-    window.addEventListener("load", handler);
-  }
-
-  /**
    * Adds a click event handler to the weather element.
    * @param handler - The function to execute when a click event occurs.
    */
@@ -33,6 +25,7 @@ class WeatherView extends View {
         firstChild.classList.contains(className)
       );
       if (isClassPresent) return;
+
       handler();
     });
   }
