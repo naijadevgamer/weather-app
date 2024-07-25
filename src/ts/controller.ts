@@ -6,6 +6,7 @@ import highlightView from "./views/highlightView";
 import tempUnitChangeView from "./views/tempUnitChangeView";
 import searchView from "./views/searchView";
 import currentLocationView from "./views/locationView";
+import recentSearchView from "./views/recentSearchView";
 
 /**
  * Control function to fetch and display weather data for the current location.
@@ -28,6 +29,7 @@ const controlCurrentLocationWeather = () => {
           weatherView.render(model.state);
           forecastView.render(model.state);
           highlightView.render(model.state);
+          recentSearchView.render(model.state);
         } catch (err: any) {
           // Handle errors by rendering error messages
           weatherView.renderError(err.message);
@@ -95,9 +97,27 @@ const controlSearchResult = async () => {
     // Get search query and fetch results
     const query = searchView.getQuery();
     await model.loadSearchResult(query);
+    console.log(model.state.recent);
 
+    recentSearchView.render(model.state);
     // Clear search input and render results
     searchView.clearInput();
+    weatherView.render(model.state);
+    forecastView.render(model.state);
+    highlightView.render(model.state);
+  } catch (err: any) {
+    weatherView.renderError(err.message);
+  }
+};
+
+const controlRecent = async (query: string) => {
+  try {
+    // Render loading states
+    weatherView.renderSpinner();
+    forecastView.renderSkeleton();
+    highlightView.renderNull();
+    await model.loadSearchResult(query);
+
     weatherView.render(model.state);
     forecastView.render(model.state);
     highlightView.render(model.state);
@@ -117,7 +137,10 @@ const init = () => {
   tempUnitChangeView.addHandlerClick(controlTempUnitChange);
   searchView.addHandlerSubmit(controlSearchResult);
   currentLocationView.addHandlerClick(controlCurrentLocationWeather);
+  recentSearchView.addHandlerClick(controlRecent);
 };
 
 // Initialize the app
 init();
+
+// localStorage.clear();

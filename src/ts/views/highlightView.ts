@@ -131,7 +131,7 @@ class HighlightView extends View {
       </h2>
       <div
         class="grid grid-rows-highlight grid-cols-2 gap-20 max-tl:grid-cols-highlight max-tl:auto-rows-max max-tl:grid-rows-none max-p:grid-cols-highlight-p max-p:gap-10"
-      >
+      >        
         <!-- Wind status -->
         <div class="bg-secondary-bg text-center p-8 fade-in-bottom">
           <h3 class="font-medium">Wind status</h3>

@@ -15,6 +15,7 @@ export let state: {
   forecastData: ForecastObject[];
   forecastIconNames: string[];
   query: string;
+  recent: string[];
   celcius: boolean;
 } = {
   weatherData: {} as WeatherObject,
@@ -22,6 +23,7 @@ export let state: {
   forecastData: [] as ForecastObject[],
   forecastIconNames: [],
   query: "",
+  recent: JSON.parse(localStorage.getItem("recent") || "[]"),
   celcius: true,
 };
 
@@ -239,6 +241,18 @@ export const loadCurrentLocationWeather = async (
   }
 };
 
+const persistRecentSearch = (): void => {
+  if (state.recent.includes(state.query)) return;
+  // console.log(state.recent.includes(state.query));
+  if (state.recent.length < 3) state.recent.unshift(state.query);
+  else {
+    state.recent.pop();
+    state.recent.unshift(state.query);
+  }
+
+  localStorage.setItem("recent", JSON.stringify(state.recent));
+};
+
 /**
  * Fetch weather and forecast data based on search query.
  * @param query - City name or search query
@@ -277,6 +291,7 @@ export const loadSearchResult = async (query: string): Promise<void> => {
     state.forecastIconNames = state.forecastData.map((forecast) =>
       getWeatherIcon(forecast)
     );
+    persistRecentSearch();
   } catch (err) {
     console.error("Failed to load search results:", err);
     throw err;
