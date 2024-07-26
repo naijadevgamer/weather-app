@@ -1,5 +1,3 @@
-<!-- Please update value in the {}  -->
-
 <h1 align="center">Weather Forecast App ☁️🌧️☀️</h1>
 
 <div align="center">
@@ -8,15 +6,15 @@
 
 <div align="center">
   <h3>
-    <a href="https://{your-demo-link.your-domain}">
+    <a href="https://naijadevgamer.github.io/rock-paper-scissors/">
       Demo
     </a>
     <span> | </span>
-    <a href="https://{your-url-to-the-solution}">
+    <a href="https://github.com/naijadevgamer/rock-paper-scissors">
       Solution
     </a>
     <span> | </span>
-    <a href="https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv">
+    <a href="https://legacy.devchallenges.io/challenges/mM1UIenRhK808W8qmLWv">
       Challenge
     </a>
   </h3>
@@ -26,20 +24,24 @@
 
 ## 📋 Table of Contents
 
-- [Overview](#overview)
-  - [Built With](#built-with)
-- [Features](#features)
-- [How to use](#how-to-use)
-- [Contact](#contact)
-- [Acknowledgements](#acknowledgements)
+- [🌍 Overview](#overview)
+  - [🛠️ Built With](#built-with)
+- [✨ Features](#features)
+- [🚀 How To Use](#how-to-use)
+- [📞 Contact](#contact)
+- [🙏 Acknowledgements](#acknowledgements)
+
+---
 
 <!-- OVERVIEW -->
 
 ## 🌍 Overview
 
-![screenshot](https://user-images.githubusercontent.com/16707738/92399059-5716eb00-f132-11ea-8b14-bcacdc8ec97b.png)
+![screenshot](./src/app.png)
 
 Welcome to my Weather Forecast App! This app is all about giving you accurate and up-to-date weather information for your location or any city you search for. Whether you want to check if you need an umbrella today or plan your weekend trip, this app got you covered! 😎
+
+---
 
 ### 🛠️ Built With
 
@@ -60,9 +62,9 @@ One thing I found very interesting was dealing with the OpenWeatherMap API to fe
 
 Here's a piece of wisdom from my journey: _"Take things step by step, and don't be afraid to experiment."_ Sometimes the best solutions come from trying out different ideas and approaches.
 
-## ✨ Features
+---
 
-This application/site was created as a submission to a [DevChallenges](https://devchallenges.io/challenges) challenge. The [challenge](https://devchallenges.io/challenges/mM1UIenRhK808W8qmLWv) was to build an application to complete the given user stories.
+## ✨ Features
 
 Here's what the app can do:
 
@@ -80,6 +82,8 @@ Here's what the app can do:
 - **Temperature Conversion (Optional)**: I can convert temperatures between Celsius and Fahrenheit.
 - **Detailed Daily Forecast**: By clicking on a forecast day, I can get wind status, direction, humidity, visibility, and air pressure of each day.
 - **Recent Searches**: I can see the last three searches that I have made.
+
+---
 
 ## 🚀 How To Use
 
@@ -100,15 +104,9 @@ $ npm run build
 
 # Run the app
 $ npm start
+```
 
-## 🙏 Acknowledgements
-
-First and foremost, all praises to Allah for giving me the strength and ability to complete this project.
-
-This project was possible thanks to some amazing resources and tools:
-
-- [OpenWeatherMap API](https://openweathermap.org/api) for providing the weather data.
-- [DevChallenges](https://devchallenges.io/) for the inspiration and challenge.
+---
 
 ## 📞 Contact
 
@@ -119,4 +117,14 @@ Feel free to reach out if you have any questions or suggestions. I’d love to h
 - **Instagram**: [@naijadevgamer](https://www.instagram.com/naijadevgamer)
 - **LinkedIn**: [Abdullah Saleeman](https://www.linkedin.com/in/abdullah-saleeman-360170243)
 - **Email**: [sabdullahialaba50@gmail.com](mailto:sabdullahialaba50@gmail.com)
-```
+
+---
+
+## 🙏 Acknowledgements
+
+First and foremost, all praises to Allah for giving me the strength and ability to complete this project.
+
+This project was possible thanks to some amazing resources and tools:
+
+- [OpenWeatherMap API](https://openweathermap.org/api) for providing the weather data.
+- [DevChallenges](https://devchallenges.io/) for the inspiration and challenge.
