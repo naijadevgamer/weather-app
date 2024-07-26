@@ -37,7 +37,7 @@
 
 ## 🌍 Overview
 
-![screenshot](./src/app.png)
+![screenshot](./app.png)
 
 Welcome to my Weather Forecast App! This app is all about giving you accurate and up-to-date weather information for your location or any city you search for. Whether you want to check if you need an umbrella today or plan your weekend trip, this app got you covered! 😎
 
