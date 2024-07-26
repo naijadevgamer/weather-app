@@ -6,11 +6,11 @@
 
 <div align="center">
   <h3>
-    <a href="https://naijadevgamer.github.io/rock-paper-scissors/">
+    <a href="https://naijadevgamer.github.io/weather-forecast-app/">
       Demo
     </a>
     <span> | </span>
-    <a href="https://github.com/naijadevgamer/rock-paper-scissors">
+    <a href="https://github.com/naijadevgamer/weather-forecast-app">
       Solution
     </a>
     <span> | </span>
@@ -24,12 +24,12 @@
 
 ## 📋 Table of Contents
 
-- [🌍 Overview](#overview)
-  - [🛠️ Built With](#built-with)
-- [✨ Features](#features)
-- [🚀 How To Use](#how-to-use)
-- [📞 Contact](#contact)
-- [🙏 Acknowledgements](#acknowledgements)
+- [Overview](#-overview)
+  - [Built With](#-built-with)
+- [Features](#-features)
+- [How To Use](#-how-to-use)
+- [Contact](#-contact)
+- [Acknowledgements](#-acknowledgements)
 
 ---
 
