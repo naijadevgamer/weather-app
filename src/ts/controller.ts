@@ -37,6 +37,7 @@ const controlCurrentLocationWeather = () => {
       },
       (error: GeolocationPositionError) => {
         // Handle geolocation errors
+        console.log(error);
         weatherView.renderError(
           "Could not get your position: " + error.message
         );
@@ -45,7 +46,7 @@ const controlCurrentLocationWeather = () => {
       },
       {
         enableHighAccuracy: true, // Request high accuracy for the location
-        timeout: 5000, // Timeout after 5 seconds
+        timeout: 20000, // Timeout after 5 seconds
         maximumAge: 0, // Do not use cached location
       }
     );
@@ -146,3 +147,5 @@ const init = () => {
 
 // Initialize the app
 init();
+
+// localStorage.clear();
