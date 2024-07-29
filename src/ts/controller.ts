@@ -12,16 +12,16 @@ import recentSearchView from "./views/recentSearchView";
  * Control function to fetch and display weather data for the current location.
  */
 const controlCurrentLocationWeather = () => {
+  // Render loading states
+  weatherView.renderSpinner();
+  forecastView.renderSkeleton();
+  highlightView.renderNull();
+
   // Check if geolocation is available in the browser
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(
       async (position: GeolocationPosition) => {
         try {
-          // Render loading states
-          weatherView.renderSpinner();
-          forecastView.renderSkeleton();
-          highlightView.renderNull();
-
           // Load weather data for the current location
           await model.loadCurrentLocationWeather(position);
 
@@ -37,24 +37,19 @@ const controlCurrentLocationWeather = () => {
       },
       (error: GeolocationPositionError) => {
         // Handle geolocation errors
-        console.log(error);
         weatherView.renderError(
           "Could not get your position: " + error.message
         );
-        forecastView.renderSkeleton();
-        highlightView.renderNull();
       },
       {
         enableHighAccuracy: true, // Request high accuracy for the location
-        timeout: 20000, // Timeout after 5 seconds
+        timeout: 20000, // Timeout after 20 seconds
         maximumAge: 0, // Do not use cached location
       }
     );
   } else {
     // Handle case where geolocation is not supported
     weatherView.renderError("Geolocation is not supported by your browser.");
-    forecastView.renderSkeleton();
-    highlightView.renderNull();
   }
 };
 

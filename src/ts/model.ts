@@ -244,7 +244,12 @@ export const loadCurrentLocationWeather = async (
  */
 const persistRecentSearch = (): void => {
   // Return if query is already present
-  if (state.recent.includes(state.query)) return;
+  if (
+    state.recent.some(
+      (recent) => recent.toLowerCase() === state.query.toLowerCase()
+    )
+  )
+    return;
 
   // Checks if the array can take in more recent search query
   if (state.recent.length < 3) state.recent.unshift(state.query);

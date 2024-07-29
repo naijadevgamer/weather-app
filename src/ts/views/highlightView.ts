@@ -125,6 +125,11 @@ class HighlightView extends View {
         ? `${forecast.windDirection - 45}deg`
         : `${45 - forecast.windDirection}deg`;
 
+    const visibility = forecast.visibility
+      .toFixed(1)
+      .toString()
+      .replace(".", ",");
+
     return `
       <h2 class="fade-in-bottom text-[2.4rem] mb-10 max-p:text-center">
         ${this.getDay(forecast, "highlight")}'s Highlight
@@ -197,7 +202,7 @@ class HighlightView extends View {
 
           <!-- Visibility value  -->
           <p class="text-[6.4rem]">
-            <span>${forecast.visibility.toFixed(1)}</span
+            <span>${visibility}</span
             ><span class="text-[3.6rem]"> miles</span>
           </p>
         </div>
@@ -226,6 +231,10 @@ class HighlightView extends View {
       this.data.weatherData.windDirection > 45
         ? `${this.data.weatherData.windDirection - 45}deg`
         : `${45 - this.data.weatherData.windDirection}deg`;
+
+    const visibility = this.data.weatherData.visibility
+      .toString()
+      .replace(".", ",");
 
     return `<h2
         class="text-[2.4rem] mb-10 max-p:text-center fade-in-bottom"
@@ -297,7 +306,7 @@ class HighlightView extends View {
 
           <!-- Visibility value  -->
           <p class="text-[6.4rem]">
-            <span>${this.data.weatherData.visibility}</span
+            <span>${visibility}</span
             ><span class="text-[3.6rem]"> miles</span>
           </p>
         </div>

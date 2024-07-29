@@ -41,8 +41,8 @@ module.exports = {
         // Body layout
         highlight: "20.4rem, 15.9rem",
         body: "minmax(102.3rem, 100vh)",
-        "body-tl": "minmax(max-content, 100vh)",
-        "body-p": "minmax(100vh, max-content), max-content",
+        "body-tl": "minmax(max-content, 100dvh)",
+        "body-p": "minmax(100dvh, max-content), max-content",
       },
       screens: {
         "large-desktop": "1800px", // 1800px
