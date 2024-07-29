@@ -65,7 +65,7 @@ class WeatherView extends View {
 
       <!-- Weather Name -->
       <p
-        class="mx-auto text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:my-10 max-p:mt-10 max-p:mb-10 fade-in-bottom"
+        class="mx-auto text-center text-[3.6rem] my-auto font-semibold text-secondary-text max-tl:px-7 max-tl:my-10 max-p:mt-10 max-p:mb-10 fade-in-bottom"
       >
         ${this.data.weatherData.weatherName}
       </p>
